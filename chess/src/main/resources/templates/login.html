@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:pd="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>简单登录</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/AdminLTE.css">
+    <link rel="stylesheet" href="/css/blue.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>登录</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+
+        <form action="#">
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="username" id="username">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="password" id="password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 pull-left">
+                    <button type="button" class="btn btn-info btn-block btn-flat" id="register">注册</button>
+                </div>
+
+                <div class="col-sm-4 pull-right">
+                    <button type="button" class="btn btn-success btn-block btn-flat" id="login">登录</button>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="false" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" ></h4>
+                <label id="hidden_id" hidden></label>
+            </div>
+            <div class="modal-body" id="confirmModalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelModalBtn">关闭</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" id="confirmModalBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery-3.1.1.min.js" ></script>
+
+<script src="/js/bootstrap.js" ></script>
+<script>
+    $(function () {
+        $('input').val("");
+
+        $('#login').on('click', function () {
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+
+            if (checkNull(username, "用户名不能为空") || checkNull(password, "密码不能为空")) {
+                return ;
+            }
+            var data =  "username=" + username + "&password=" + password;
+            $.ajax({
+                url: "/user/login",
+                type: "post",
+                data: data,
+                success: function (data) {
+                    if (data.success == false) {
+                        checkNull(null, data.message);
+                        return ;
+                    }
+                    checkNull(null, "登录成功");
+                    localStorage.setItem("username", data.result);
+
+                    console.log(localStorage.getItem("username"))
+                    location.href = "/homepage/success";
+                }
+            })
+        })
+
+        $('#register').on('click', function () {
+            var username = $('#username').val();
+            var password = $('#password').val();
+
+
+            if (checkNull(username, "用户名不能为空") || checkNull(password, "密码不能为空")) {
+                return ;
+            }
+            var data =  "username=" + username + "&password=" + password;
+            $.ajax({
+                url: "/user/register",
+                type: "post",
+                data: data,
+                success: function (data) {
+                    checkNull(null, data.message);
+
+                }
+            })
+        })
+    });
+
+    function checkNull(val, msg) {
+        if (val == null || val == undefined || val == "") {
+            $('#confirmModalBody').text(msg + "^_^");
+            $('#confirmModal').modal('show');
+            return true;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

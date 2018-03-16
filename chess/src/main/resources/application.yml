@@ -1,0 +1,35 @@
+server:
+  port: 8080
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: LEGACYHTML5
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+
+
+druid:
+  datasource:
+    username: root  #数据库用户名
+    password: root      #数据库密码
+    driverClassName: com.mysql.jdbc.Driver  #数据库驱动
+    url: jdbc:mysql://localhost:3306/chess?useUnicode=true&amp;characterEncoding=UTF-8&useSSL=true  #数据库连接
+    initialSize: 2    #初始化连接池数量
+    minIdle: 1        #最小生存连接数
+    maxActive: 10     #最大连接池数量
+    timeBetweenConnectErrorMillis: 60000  # Destroy线程会检测连接的间隔时间，如果连接空闲时间大于等于minEvictableIdleTimeMillis则关闭物理连接，单位是毫秒
+    minEvictableIdleTimeMillis: 300000  # 连接保持空闲而不被驱逐的最长时间，单位是毫秒
+    testWhileIdle: true    #申请连接的时候,如果检测到连接空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+    testOnBorrow: false    #申请连接时执行validationQuery检测连接是否有效
+    testOnReturn: false   # 归还连接时执行validationQuery检测连接是否有效
+    validationQuery: select 1
+
+
+mybatis:
+  mapper-locations: "classpath:mybatis/*.xml"
+
