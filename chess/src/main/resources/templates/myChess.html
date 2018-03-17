@@ -44,7 +44,9 @@
 			//棋线间隔93
 			var space = 60;
 			//有效的坐标
-			var validCoordinate = new Array();
+			var validCoordinate = [];
+			//当前象棋状态
+			var chessStatus = [];
 			//绘制棋盘外边框粗黑
 			var blackRect = new coordinate(20, 20);
 			ctx.lineWidth = 4;
@@ -76,6 +78,8 @@
 			function initData() {
                 //保存有效坐标
                 saveValidCoordinate();
+                //保存当前的象棋的状态
+                saveChessStatus();
             }
             
             function initEvent() {
@@ -83,7 +87,7 @@
                     var point = getPointOnCanvas(e.clientX, e.clientY);
                     //得到距离鼠标最近的画布坐标
                     var nearestCoordinate = getNearestCoordinate(point);
-					console.log(nearestCoordinate.x / space + " , " + nearestCoordinate.y / space)
+					//TODO  判断当前坐标是否有象棋存在，有：{己方:提示不能移动,敌方：则杀死并移动}无：移动  tip:移动设置为一个方法
                 })
             }
 
@@ -92,14 +96,19 @@
                 var res = new coordinate(0, 0);
                 var min = 0x3fffffff;
                 var len;
-				validCoordinate.forEach(function (crd) {
-				    len = Math.sqrt(Math.pow(point.x - crd.x, 2) + Math.pow(point.y - crd.y, 2));
-					if (len < min) {
-					    min = len;
-					    res = crd;
-					}
-				});
-				return res;
+
+                for(var key in validCoordinate) {
+                    var crd = validCoordinate[key];
+                    len = Math.sqrt(Math.pow(point.x - crd.x, 2) + Math.pow(point.y - crd.y, 2));
+                    if (len < min) {
+                        min = len;
+                        res = crd;
+                    }
+				}
+				return {
+                    x: (res.x - start.x) / space,
+                    y: (res.y - start.y) / space
+				};
             }
 			/**
 			 * 获得当前鼠标在canvas上的坐标
@@ -227,14 +236,50 @@
             }
             //保存有效的坐标位置
             function saveValidCoordinate() {
-                var index = 0;
-				for (var i = 0; i < xNum - 1; i++) {
+                var index;
+				for (var i = 0; i < xNum; i++) {
 				    for(var j = 0; j < yNum - 1; j++) {
-                        validCoordinate[index++] = new coordinate(getCoordinateX(i), getCoordinateY(j));
+				        index = i + "," + j;
+				        chessStatus[index] = null;
+                        validCoordinate[index] = new coordinate(getCoordinateX(i), getCoordinateY(j));
 					}
 				}
             }
-
+			//保存初始时的象棋状态
+			function saveChessStatus() {
+                chessStatus["0,3"] = "redArmy";
+                chessStatus["2,3"] = "redArmy";
+                chessStatus["4,3"] = "redArmy";
+                chessStatus["6,3"] = "redArmy";
+                chessStatus["8,3"] = "redArmy";
+                chessStatus["0,0"] = "redCar";
+                chessStatus["8,0"] = "redCar";
+                chessStatus["1,0"] = "redHouse";
+                chessStatus["7,0"] = "redHouse";
+                chessStatus["2,0"] = "redElephant";
+                chessStatus["6,0"] = "redElephant";
+                chessStatus["3,0"] = "redSoldier";
+                chessStatus["5,0"] = "redSoldier";
+                chessStatus["1,2"] = "redCannon";
+                chessStatus["7,2"] = "redCannon";
+                chessStatus["4,0"] = "redGeneral";
+                chessStatus["0,6"] = "blackArmy";
+                chessStatus["2,6"] = "blackArmy";
+                chessStatus["4,6"] = "blackArmy";
+                chessStatus["6,6"] = "blackArmy";
+                chessStatus["8,6"] = "blackArmy";
+                chessStatus["0,9"] = "blackCar";
+                chessStatus["8,9"] = "blackCar";
+                chessStatus["1,9"] = "blackHouse";
+                chessStatus["7,9"] = "blackHouse";
+                chessStatus["2,9"] = "blackElephant";
+                chessStatus["6,9"] = "blackElephant";
+                chessStatus["3,9"] = "blackSoldier";
+                chessStatus["5,9"] = "blackSoldier";
+                chessStatus["1,7"] = "blackCannon";
+                chessStatus["7,7"] = "blackCannon";
+                chessStatus["4,9"] = "blackGeneral";
+            }
             /**
              * 绘制棋盘线
              * @param x_s	起始坐标x
