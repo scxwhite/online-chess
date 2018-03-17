@@ -20,6 +20,6 @@ public class ChessApplication {
 
 	@RequestMapping("/")
 	public String home() {
-		return "login";
+		return "myChess";
 	}
 }
