@@ -2,6 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c26d46f-a38d-4baf-adbf-84e593d5a540" name="Default" comment="13819233529">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-army.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_army.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-cannon.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_cannon.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-car.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_car.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-elephant.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_elephant.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-general.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_general.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-house.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_house.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-soldier.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_soldier.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-army.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_army.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-cannon.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_cannon.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-car.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_car.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-elephant.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_elephant.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-general.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_general.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-house.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_house.gif" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-soldier.gif" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_soldier.gif" />
       <change beforePath="$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html" afterPath="$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html" />
     </list>
     <ignored path="$PROJECT_DIR$/chess/target/" />
@@ -20,23 +35,24 @@
       <file leaf-file-name="myChess.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="89" column="84" lean-forward="false" selection-start-line="89" selection-start-column="84" selection-end-line="89" selection-end-column="84" />
+            <state relative-caret-position="379">
+              <caret line="141" column="32" lean-forward="true" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#2390#2679#0" expanded="false" />
-                <element signature="e#3636#3729#0" expanded="false" />
-                <element signature="e#3872#3951#0" expanded="false" />
-                <element signature="e#7880#8779#0" expanded="false" />
-                <element signature="e#8837#9364#0" expanded="false" />
-                <element signature="e#9419#9842#0" expanded="false" />
-                <element signature="e#9896#10316#0" expanded="false" />
-                <element signature="e#12380#12548#0" expanded="false" />
-                <element signature="e#12599#12753#0" expanded="false" />
-                <element signature="e#12767#12862#0" expanded="false" />
-                <element signature="e#12901#12972#0" expanded="false" />
-                <element signature="e#12985#13081#0" expanded="false" />
-                <element signature="e#13120#14094#0" expanded="false" />
+                <element signature="e#6230#6387#0" expanded="false" />
+                <element signature="e#6597#6880#0" expanded="false" />
+                <element signature="e#7523#7592#0" expanded="false" />
+                <element signature="e#7677#7836#0" expanded="false" />
+                <element signature="e#7902#8861#0" expanded="false" />
+                <element signature="e#8927#9506#0" expanded="false" />
+                <element signature="e#9569#10012#0" expanded="false" />
+                <element signature="e#10074#10598#0" expanded="false" />
+                <element signature="e#10674#11096#0" expanded="false" />
+                <element signature="e#11169#12958#0" expanded="false" />
+                <element signature="e#13222#13396#0" expanded="false" />
+                <element signature="e#13568#13651#0" expanded="false" />
+                <element signature="e#13668#13780#0" expanded="false" />
+                <element signature="e#13823#14857#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -56,7 +72,19 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>validCoordinate</find>
+      <find>coordinate</find>
+      <find>black_army</find>
+      <find>-</find>
+      <find>black_car</find>
+      <find>getCoordinateX(</find>
+      <find>)</find>
+      <find>chessStatus</find>
+      <find>console</find>
     </findStrings>
+    <replaceStrings>
+      <replace>Coordinate</replace>
+      <replace>_</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -108,7 +136,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="683" />
     <option name="width" value="683" />
     <option name="height" value="728" />
@@ -154,6 +182,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -248,9 +279,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -760,72 +788,55 @@
       <updated>1521187509240</updated>
       <workItem from="1521187510673" duration="5927000" />
       <workItem from="1521195521993" duration="121000" />
+      <workItem from="1521327375655" duration="9107000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33581000" />
+    <option name="totallyTimeSpent" value="42735000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="683" y="0" width="683" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4087838" sideWeight="0.505618" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26626325" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3963816" sideWeight="0.49438202" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39802632" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38980263" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1633888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32263514" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5438729" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39955357" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31473213" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25266525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -877,11 +888,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/login/wechat.png" />
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/background/battle.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/background/battle.jpg" />
     <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/login/account.png" />
     <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/util/ControllerUtil.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -890,21 +897,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="1625" column="4" lean-forward="false" selection-start-line="1625" selection-start-column="4" selection-end-line="1625" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/test/java/com/xyny/ChessApplicationTests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -931,9 +927,9 @@
         <state relative-caret-position="153">
           <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#574#575#0" expanded="true" />
-            <element signature="e#597#598#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#574#575#0" expanded="false" />
+            <element signature="e#597#598#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1040,21 +1036,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/login/wechat.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/background/battle.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/login/account.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/login/wechat.png" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/background/battle.jpg" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/ui/login/account.png" />
     <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/util/ControllerUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -1080,51 +1064,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/象棋棋盘.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/象棋_棋子.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/blue-jiang.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/blue-ju.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-bing.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-jiang.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-ju.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-pao.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/blue-bing.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/象棋棋盘.jpg" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/象棋_棋子.jpg" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/blue-jiang.gif" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/blue-ju.gif" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-bing.gif" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-jiang.gif" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-ju.gif" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/red-pao.gif" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/img/blue-bing.gif" />
     <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/chess.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
@@ -1133,27 +1081,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/target/classes/img/background/room.jpg">
+    <entry file="file://$PROJECT_DIR$/chess/target/classes/img/background/room.jpg" />
+    <entry file="file://$PROJECT_DIR$/chess/target/classes/img/background/battle.jpg" />
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red_army.gif">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/target/classes/img/background/battle.jpg">
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_army.gif">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/img/chess/red-army.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-army.gif">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black-cannon.gif">
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/img/chess/black_cannon.gif">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -1163,32 +1103,41 @@
         <state relative-caret-position="340">
           <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#574#575#0" expanded="true" />
-            <element signature="e#597#598#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#574#575#0" expanded="false" />
+            <element signature="e#597#598#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="12474" column="4" lean-forward="false" selection-start-line="12474" selection-start-column="4" selection-end-line="12474" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="89" column="84" lean-forward="false" selection-start-line="89" selection-start-column="84" selection-end-line="89" selection-end-column="84" />
+        <state relative-caret-position="379">
+          <caret line="141" column="32" lean-forward="true" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#2390#2679#0" expanded="false" />
-            <element signature="e#3636#3729#0" expanded="false" />
-            <element signature="e#3872#3951#0" expanded="false" />
-            <element signature="e#7880#8779#0" expanded="false" />
-            <element signature="e#8837#9364#0" expanded="false" />
-            <element signature="e#9419#9842#0" expanded="false" />
-            <element signature="e#9896#10316#0" expanded="false" />
-            <element signature="e#12380#12548#0" expanded="false" />
-            <element signature="e#12599#12753#0" expanded="false" />
-            <element signature="e#12767#12862#0" expanded="false" />
-            <element signature="e#12901#12972#0" expanded="false" />
-            <element signature="e#12985#13081#0" expanded="false" />
-            <element signature="e#13120#14094#0" expanded="false" />
+            <element signature="e#6230#6387#0" expanded="false" />
+            <element signature="e#6597#6880#0" expanded="false" />
+            <element signature="e#7523#7592#0" expanded="false" />
+            <element signature="e#7677#7836#0" expanded="false" />
+            <element signature="e#7902#8861#0" expanded="false" />
+            <element signature="e#8927#9506#0" expanded="false" />
+            <element signature="e#9569#10012#0" expanded="false" />
+            <element signature="e#10074#10598#0" expanded="false" />
+            <element signature="e#10674#11096#0" expanded="false" />
+            <element signature="e#11169#12958#0" expanded="false" />
+            <element signature="e#13222#13396#0" expanded="false" />
+            <element signature="e#13568#13651#0" expanded="false" />
+            <element signature="e#13668#13780#0" expanded="false" />
+            <element signature="e#13823#14857#0" expanded="false" />
           </folding>
         </state>
       </provider>
