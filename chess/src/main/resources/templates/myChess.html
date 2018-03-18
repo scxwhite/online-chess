@@ -64,6 +64,12 @@
             //将棋盘视为以左上角 （10，10） 为圆点的坐标轴
             var start = new Coordinate(blackRect.x + 5, blackRect.y + 5);
             var end = new Coordinate(getCoordinateX(xNum - 1), getCoordinateY(yNum - 1));
+            //连续将军的次数
+            var chessNum = 0;
+            //敌方老将的位置
+            var enemyGeneral;
+            //我方老将的位置
+            var myGeneral;
             //初始化数据
             initData();
             //初始化界面
@@ -95,6 +101,14 @@
             }
 
             function initData() {
+                if (myUser === "red") {
+                    enemyGeneral = new Coordinate(4, 9);
+                    myGeneral = new Coordinate(4, 0);
+                }
+                else {
+                    enemyGeneral = new Coordinate(4, 0);
+                    myGeneral = new Coordinate(4, 9);
+                }
                 //保存有效坐标
                 saveValidCoordinate();
                 //保存当前的象棋的状态
@@ -111,7 +125,7 @@
                     if (currChess == null) {
                         //如果已经选中己方棋子并且第一次点击空空棋盘位置 准备移动
                         if (!firstClick) {
-                            firstClick = chessMove(clickChess, nearest);
+                            firstClick = chessMove(clickChess, nearest, myUser);
                             //如果第一次点击空白区域  不做任何处理
                         } else {
                             return;
@@ -126,12 +140,10 @@
                         drawSelectTag(nearest);
                     } else if (currChess.split("_")[0] === otherUser) {
                         if (!firstClick) {
-                            chessMove(clickChess, nearest);
+                            chessMove(clickChess, nearest, myUser);
                         } else {
                             alert("只能移动" + myUser + "方棋子哦");
                         }
-
-
                     }
                 });
                 $('#changeUser').on('click', function () {
@@ -141,14 +153,16 @@
                 });
             }
 
+
             /**
              *
              * 准备棋子移动  首先校验棋子的有效性
              * clearRect会自动清除移动之前位置的所有棋子  所以不用判断此次移动是吃子还是移动
              * @param pointX 开始移动的位置
              * @param pointY 结束移动的位置
+             * @param user  当前移动的用户
              **/
-            function chessMove(pointX, pointY) {
+            function chessMove(pointX, pointY, user) {
                 var chessName = chessStatus[pointX.x + "," + pointX.y];
                 if (chessName == null || !canMove(chessName, pointX, pointY)) {
                     return false;
@@ -156,12 +170,100 @@
                 chessStatus[pointX.x + "," + pointX.y] = null;
                 chessStatus[pointY.x + "," + pointY.y] = chessName;
                 drawImage($('#' + chessName)[0], pointY.x, pointY.y);
+                //重绘棋盘
                 initUI();
                 ctx.save();
+                //记录地方老将的位置
+                if (chessName === otherUser + "_general") enemyGeneral = pointY;
+                //记录我方老将的位置
+                if (chessName === myUser + "_general") myGeneral = pointY;
+                //检验将军状态
+                check();
+                //TODO  告知远程执行移动操作
+
+                //判断胜利条件
+                checkWin(pointY, user);
+
                 return true;
             }
 
-            //TODO  校验可行性
+            /**
+             * 判断胜利条件
+             *
+             **/
+            function checkWin(pointY, user) {
+                //如果是我方移动移动
+                if (user === myUser) {
+                    if (pointY.x === enemyGeneral.x && pointY.y === enemyGeneral.y) {
+                        gameOver("恭喜你，你赢了");
+                        return;
+                    }
+                    //老将对面 ：先判断移动的是老将 然后判断是否对面
+                    if (checkGeneralFace()) {
+                        gameOver("抱歉，你输了");
+                    }
+                } else { //如果是 敌方移动
+                    if (pointY.x === myGeneral.x && pointY.y === myGeneral.y) {
+                        gameOver("抱歉，你输了");
+                        return;
+                    }
+                    //老将对面 ：先判断移动的是老将 然后判断是否对面
+                    if (checkGeneralFace()) {
+                        gameOver("恭喜你，你赢了");
+                    }
+                }
+            }
+            /**
+             *
+             * 判断老将对面
+             **/
+            function checkGeneralFace() {
+                //在同一列
+                if(myGeneral.x === enemyGeneral.x) {
+                    //中间无子相隔
+                    var minY = Math.min(myGeneral.y, enemyGeneral.y);
+                    var maxY = Math.max(myGeneral.y, enemyGeneral.y);
+                    var chessNumInPath = 0;
+                    for(var i = minY + 1; i < maxY; i++) {
+                        if(chessStatus[myGeneral.x + "," + i] != null) {
+                            chessNumInPath++;
+                        }
+                    }
+                    if(chessNumInPath === 0) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            /**
+             * 游戏结束
+             **/
+            function gameOver(msg) {
+                alert(myUser + ":" + msg);
+                //TODO  初始化
+            }
+            //将军操作检验
+            function check() {
+                var chessName, point;
+                for (var key in chessStatus) {
+                    chessName = chessStatus[key];
+                    if (chessName == null) continue;
+                    key = key.split(",");
+                    point = new Coordinate(key[0], key[1]);
+                    //TODO  (4,7)炮不将军
+                    if (canMove(chessName, point, enemyGeneral)) {
+                        alert("将军！！！！！！");
+                        return;
+                    }
+                }
+
+            }
+            /**
+             * 移动规则
+             * @param chessName  象棋名称例如:black_car
+             * @param pointX    起始坐标 即：需要移动的象棋的坐标
+             * @param pointY    终点坐标 即：象棋走向的坐标
+             **/
             function canMove(chessName, pointX, pointY) {
                 var chessName = chessName.split("_");
                 var isRed = chessName[0] === "red" ? true : false;
@@ -254,15 +356,15 @@
                     //未过河 只能前进
                     if (isRed) {
                         //前进
-                        if (pointX.x === pointY.x && pointX.y + 1 === pointY . y) return true;
+                        if (pointX.x === pointY.x && pointX.y + 1 === pointY.y) return true;
                     } else {
-                        if (pointX.x === pointY.x && pointX.y - 1 === pointY . y) return true;
+                        if (pointX.x === pointY.x && pointX.y - 1 === pointY.y) return true;
                     }
                     //过河可以横着走
-                    if(crossRiver(isRed, pointY)) {
+                    if (crossRiver(isRed, pointY)) {
                         //横着走
-                        if (pointX.x + 1 === pointY.x && pointX.y === pointY . y) return true;
-                        if (pointX.x - 1 === pointY.x && pointX.y === pointY . y) return true;
+                        if (pointX.x + 1 === pointY.x && pointX.y === pointY.y) return true;
+                        if (pointX.x - 1 === pointY.x && pointX.y === pointY.y) return true;
                     }
                 }
                 //马
@@ -304,14 +406,14 @@
                     //横着走
                     if (tmp_y === pointY.y) {
                         //左
-                        while(--tmp_x > pointY.x) {
+                        while (--tmp_x > pointY.x) {
                             if (chessStatus[tmp_x + "," + tmp_y] != null) {
                                 chessNumOnPath++;
                             }
                         }
                         tmp_x = pointX.x;
                         //右
-                        while(++tmp_x < pointY.x) {
+                        while (++tmp_x < pointY.x) {
                             if (chessStatus[tmp_x + "," + tmp_y] != null) {
                                 chessNumOnPath++;
                             }
@@ -319,19 +421,23 @@
                         //攻击时要隔一个
                         if (chessNumOnPath === 1 && chessStatus[pointY.x + "," + pointY.y] != null) return true;
                         //不攻击时 一个都不能隔
-                        if (chessNumOnPath === 0 && chessStatus[pointY.x + "," + pointY.y] == null ) return true;
+                        if (chessNumOnPath === 0 && chessStatus[pointY.x + "," + pointY.y] == null) return true;
                     }
                     //竖着走
                     if (tmp_x === pointY.x) {
                         //上
-                        while(--tmp_y > pointY.y) {
+                        while (--tmp_y > pointY.y) {
                             if (chessStatus[tmp_x + "," + tmp_y] != null) {
                                 chessNumOnPath++;
                             }
                         }
+                        if (pointX.x === 4 && pointX.y === 7) {
+                            console.log(chessNumOnPath)
+                        }
+
                         tmp_y = pointX.y;
                         //下
-                        while(++tmp_y < pointY.y) {
+                        while (++tmp_y < pointY.y) {
                             if (chessStatus[tmp_x + "," + tmp_y] != null) {
                                 chessNumOnPath++;
                             }
@@ -339,7 +445,7 @@
                         //攻击时要隔一个
                         if (chessNumOnPath === 1 && chessStatus[pointY.x + "," + pointY.y] != null) return true;
                         //不攻击时 一个都不能隔
-                        if (chessNumOnPath === 0 && chessStatus[pointY.x + "," + pointY.y] == null ) return true;
+                        if (chessNumOnPath === 0 && chessStatus[pointY.x + "," + pointY.y] == null) return true;
                     }
 
 
