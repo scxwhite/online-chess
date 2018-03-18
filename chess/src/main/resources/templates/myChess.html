@@ -104,8 +104,7 @@
                 if (myUser === "red") {
                     enemyGeneral = new Coordinate(4, 9);
                     myGeneral = new Coordinate(4, 0);
-                }
-                else {
+                } else {
                     enemyGeneral = new Coordinate(4, 0);
                     myGeneral = new Coordinate(4, 9);
                 }
@@ -120,7 +119,7 @@
                     var point = getPointOnCanvas(e.clientX, e.clientY);
                     //得到距离鼠标最近的画布坐标
                     var nearest = getNearestCoordinate(point);
-                    console.log(nearest)
+                  //  console.log(nearest)
                     var currChess = chessStatus[nearest.x + "," + nearest.y];
                     if (currChess == null) {
                         //如果已经选中己方棋子并且第一次点击空空棋盘位置 准备移动
@@ -241,17 +240,19 @@
             function gameOver(msg) {
                 alert(myUser + ":" + msg);
                 //TODO  初始化
+                initData();
+                initUI();
             }
             //将军操作检验
             function check() {
-                var chessName, point;
+                var chessName, point, tempGeneral;
                 for (var key in chessStatus) {
                     chessName = chessStatus[key];
                     if (chessName == null) continue;
-                    key = key.split(",");
-                    point = new Coordinate(key[0], key[1]);
-                    //TODO  (4,7)炮不将军
-                    if (canMove(chessName, point, enemyGeneral)) {
+                    point = new Coordinate(parseInt(key.split(",")[0]), parseInt(key.split(",")[1]));
+                    if (chessName.split("_")[0] === myUser) tempGeneral = enemyGeneral;
+                    else tempGeneral = myGeneral;
+                    if (canMove(chessName, point, tempGeneral)) {
                         alert("将军！！！！！！");
                         return;
                     }
