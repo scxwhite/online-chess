@@ -116,9 +116,8 @@
 
             function initEvent() {
                 canvas_jquery.on('click', function (e) {
-                    var point = getPointOnCanvas(e.clientX, e.clientY);
                     //得到距离鼠标最近的画布坐标
-                    var nearest = getNearestCoordinate(point);
+                    var nearest = getNearestCoordinate(getPointOnCanvas(e.clientX, e.clientY));
                   //  console.log(nearest)
                     var currChess = chessStatus[nearest.x + "," + nearest.y];
                     if (currChess == null) {
@@ -178,11 +177,9 @@
                 if (chessName === myUser + "_general") myGeneral = pointY;
                 //检验将军状态
                 check();
-                //TODO  告知远程执行移动操作
-
                 //判断胜利条件
                 checkWin(pointY, user);
-
+                //TODO  告知远程执行移动操作
                 return true;
             }
 
@@ -257,7 +254,6 @@
                         return;
                     }
                 }
-
             }
             /**
              * 移动规则
@@ -691,7 +687,7 @@
              */
             function drawSelectTag(point) {
                 //棋盘线条颜色
-                ctx.strokeStyle = "red";
+                ctx.strokeStyle = myUser;
                 point = new Coordinate(getCoordinateX(point.x), getCoordinateY(point.y));
                 var tagWidth = chessWidth / 2;
                 var tagHeight = chessHeight / 2;
