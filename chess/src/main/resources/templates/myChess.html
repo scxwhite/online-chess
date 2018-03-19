@@ -5,28 +5,44 @@
     <title>象棋盘</title>
 
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
-
+    <style >
+        html{
+            margin:0 auto;
+            padding:0;
+            height: 100%;
+        }
+        body{
+            background: url("../img/background/battle.jpg") center no-repeat;
+            background-size: 100%;
+            height: 100%;
+        }
+        canvas{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
 </head>
 
-<body class="container" th:background="@{/img/background/battle.jpg}">
-<canvas id="canvas" class="center-block " width="540" height="600"></canvas>
-<div style="display: none">
-    <img th:src="@{/img/chess/black_army.gif}" id="black_army">
-    <img th:src="@{/img/chess/red_army.gif}" id="red_army">
-    <img th:src="@{/img/chess/red_cannon.gif}" id="red_cannon">
-    <img th:src="@{/img/chess/black_cannon.gif}" id="black_cannon">
-    <img th:src="@{/img/chess/black_car.gif}" id="black_car">
-    <img th:src="@{/img/chess/red_car.gif}" id="red_car">
-    <img th:src="@{/img/chess/red_elephant.gif}" id="red_elephant">
-    <img th:src="@{/img/chess/black_elephant.gif}" id="black_elephant">
-    <img th:src="@{/img/chess/black_general.gif}" id="black_general">
-    <img th:src="@{/img/chess/red_general.gif}" id="red_general">
-    <img th:src="@{/img/chess/black_horse.gif}" id="black_horse">
-    <img th:src="@{/img/chess/red_horse.gif}" id="red_horse">
-    <img th:src="@{/img/chess/red_soldier.gif}" id="red_soldier">
-    <img th:src="@{/img/chess/black_soldier.gif}" id="black_soldier">
-</div>
-<button class="btn btn-primary" id="changeUser">切换角色</button>
+<body>
+    <canvas id="canvas" class="center-block center " width="540" height="600"></canvas>
+    <button class="btn btn-primary" id="changeUser">切换角色</button>
+    <div style="display: none">
+        <img th:src="@{/img/chess/black_army.gif}" id="black_army">
+        <img th:src="@{/img/chess/red_army.gif}" id="red_army">
+        <img th:src="@{/img/chess/red_cannon.gif}" id="red_cannon">
+        <img th:src="@{/img/chess/black_cannon.gif}" id="black_cannon">
+        <img th:src="@{/img/chess/black_car.gif}" id="black_car">
+        <img th:src="@{/img/chess/red_car.gif}" id="red_car">
+        <img th:src="@{/img/chess/red_elephant.gif}" id="red_elephant">
+        <img th:src="@{/img/chess/black_elephant.gif}" id="black_elephant">
+        <img th:src="@{/img/chess/black_general.gif}" id="black_general">
+        <img th:src="@{/img/chess/red_general.gif}" id="red_general">
+        <img th:src="@{/img/chess/black_horse.gif}" id="black_horse">
+        <img th:src="@{/img/chess/red_horse.gif}" id="red_horse">
+        <img th:src="@{/img/chess/red_soldier.gif}" id="red_soldier">
+        <img th:src="@{/img/chess/black_soldier.gif}" id="black_soldier">
+    </div>
 </body>
 
 <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
@@ -118,7 +134,7 @@
                 canvas_jquery.on('click', function (e) {
                     //得到距离鼠标最近的画布坐标
                     var nearest = getNearestCoordinate(getPointOnCanvas(e.clientX, e.clientY));
-                  //  console.log(nearest)
+                    //  console.log(nearest)
                     var currChess = chessStatus[nearest.x + "," + nearest.y];
                     if (currChess == null) {
                         //如果已经选中己方棋子并且第一次点击空空棋盘位置 准备移动
@@ -209,28 +225,30 @@
                     }
                 }
             }
+
             /**
              *
              * 判断老将对面
              **/
             function checkGeneralFace() {
                 //在同一列
-                if(myGeneral.x === enemyGeneral.x) {
+                if (myGeneral.x === enemyGeneral.x) {
                     //中间无子相隔
                     var minY = Math.min(myGeneral.y, enemyGeneral.y);
                     var maxY = Math.max(myGeneral.y, enemyGeneral.y);
                     var chessNumInPath = 0;
-                    for(var i = minY + 1; i < maxY; i++) {
-                        if(chessStatus[myGeneral.x + "," + i] != null) {
+                    for (var i = minY + 1; i < maxY; i++) {
+                        if (chessStatus[myGeneral.x + "," + i] != null) {
                             chessNumInPath++;
                         }
                     }
-                    if(chessNumInPath === 0) {
+                    if (chessNumInPath === 0) {
                         return true;
                     }
                 }
                 return false;
             }
+
             /**
              * 游戏结束
              **/
@@ -240,6 +258,7 @@
                 initData();
                 initUI();
             }
+
             //将军操作检验
             function check() {
                 var chessName, point, tempGeneral;
@@ -255,6 +274,7 @@
                     }
                 }
             }
+
             /**
              * 移动规则
              * @param chessName  象棋名称例如:black_car
