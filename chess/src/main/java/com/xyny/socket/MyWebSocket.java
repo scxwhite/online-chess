@@ -1,5 +1,7 @@
 package com.xyny.socket;
 
+import lombok.NoArgsConstructor;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
@@ -7,8 +9,10 @@ import javax.websocket.server.ServerEndpoint;
  * @author suchengxiang
  * @version 创建时间：2018/3/19 21:50
  */
-@ServerEndpoint("/ws/push/")
+@ServerEndpoint("/push")
+@NoArgsConstructor
 public class MyWebSocket {
+
 
     @OnOpen
     public void onOpen(Session session) {

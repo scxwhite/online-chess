@@ -57,7 +57,7 @@
             var chessGame = new ChessGame();
             var socket = new Socket();
             chessGame.start();
-            socket.connect("ws://localhost:8080/ws/push");
+            socket.connect("ws://127.0.0.1:8080/online-chess/push");
             if (socket.isConnect()) {
                 socket.send(555);
             }
