@@ -49,8 +49,9 @@
 <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
 <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
 <!--<script th:src="@{/js/socket.js}?time=New Date()" type="text/javascript"></script>-->
-<script th:src="@{/js/chessGame.js}" type="text/javascript"></script>
-<script src="/js/socket.js?version=20180351302221811" type="text/javascript"></script>
+<!--<script th:src="@{/js/chessGame.js}" type="text/javascript"></script>-->
+<script src="/js/socket.js?version=200141" type="text/javascript"></script>
+<script src="/js/chessGame.js?version=200411" type="text/javascript"></script>
 
 
 <script>
@@ -77,8 +78,14 @@
             if (data.type === "start") {
                 gameStart = true;
                 console.log("可以开始了")
+            } else if (data.type === "move") {
+                var content = data.content.split(";");
+                var firstPoint = content[0].split(",");
+                var secondPoint = content[1].split(",");
+                var pointX = new Coordinate(parseInt(firstPoint[0]), parseInt(firstPoint[1]));
+                var pointY = new Coordinate(parseInt(secondPoint[0]), parseInt(secondPoint[1]));
+                chessGame.chessMove(pointX, pointY, otherUser);
             }
-            console.log(event)
             console.log(data)
         };
 

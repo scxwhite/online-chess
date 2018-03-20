@@ -1,3 +1,14 @@
+var myUser = 'black';
+var otherUser = 'red';
+/**
+ * 坐标对象
+ * @param x    x坐标
+ * @param y    y坐标
+ */
+function Coordinate(x, y) {
+    this.x = x;
+    this.y = y;
+}
 var ChessGame = function () {
     var oChessGame = new Object();
     var canvas_jquery = $("#canvas");
@@ -11,8 +22,6 @@ var ChessGame = function () {
     var enemyGeneral = new Coordinate(4, 0);
     //我方老将的位置
     var myGeneral = new Coordinate(4, 9);
-    var myUser = 'black';
-    var otherUser = 'red';
     var signSize = 8;
     var signSpace = 3;
     var chessWidth = 50, chessHeight = 50;
@@ -37,15 +46,6 @@ var ChessGame = function () {
     //连续将军的次数
     var chessNum = 0;
 
-    /**
-     * 坐标对象
-     * @param x    x坐标
-     * @param y    y坐标
-     */
-    function Coordinate(x, y) {
-        this.x = x;
-        this.y = y;
-    }
 
     //得到相对于棋盘的X坐标位置
     function getCoordinateX(num) {
@@ -379,6 +379,7 @@ var ChessGame = function () {
      * @param user  当前移动的用户
      **/
     oChessGame.chessMove = function (pointX, pointY, user) {
+
         var chessName = chessStatus[pointX.x + "," + pointX.y];
         if (chessName === null || !canMove(chessName, pointX, pointY)) {
             return false;
@@ -403,17 +404,23 @@ var ChessGame = function () {
         checkWin(pointY, user);
         //TODO  告知远程执行移动操作
         if (user === myUser) {
+            changePoint(pointX);
+            changePoint(pointY);
             socket.send(new socketMessage("move", pointX.x + "," + pointX.y + ";" + pointY.x + "," +pointY.y));
         }
+        console.log("移动完成")
         return true;
     };
+    function changePoint(point) {
+        point.x = -point.x + xNum - 1;
+        point.y = -point.y + yNum - 1;
+    }
+
     /**
      * 是否将军操作检验
      */
     function check() {
         var chessName, point, tempGeneral;
-        console.log("敌方老将位置：(" + enemyGeneral.x + " " + enemyGeneral.y + ")")
-        console.log("我方老将位置：(" + myGeneral.x + " " + myGeneral.y + ")")
         for (var key in chessStatus) {
             chessName = chessStatus[key];
             if (chessName === null) continue;

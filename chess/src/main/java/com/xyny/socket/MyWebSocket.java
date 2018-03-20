@@ -1,7 +1,6 @@
 package com.xyny.socket;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xyny.model.ChessPlayer;
 import com.xyny.model.ChessStatus;
 import com.xyny.model.SocketMessage;
 import lombok.NoArgsConstructor;
@@ -9,11 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import javax.swing.*;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -72,13 +69,12 @@ public class MyWebSocket {
                     log.info("找到对手~~");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.MOVE.getType())) {
             //移动棋子fg
             log.info(socketMessage.getContent());
+            sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
         }
     }
 
@@ -94,8 +90,12 @@ public class MyWebSocket {
         t.printStackTrace();
     }
 
-    public void sendMessage(SocketMessage msg) throws IOException {
-        this.session.getBasicRemote().sendText(JSONObject.toJSONString(msg));
+    public void sendMessage(SocketMessage msg) {
+        try {
+            this.session.getBasicRemote().sendText(JSONObject.toJSONString(msg));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
