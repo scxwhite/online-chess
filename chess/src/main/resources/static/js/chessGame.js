@@ -469,21 +469,18 @@ var ChessGame = function () {
      **/
     function checkGeneralFace() {
         //在同一列
-        if (myGeneral.x === enemyGeneral.x) {
-            //中间无子相隔
-            var minY = Math.min(myGeneral.y, enemyGeneral.y);
-            var maxY = Math.max(myGeneral.y, enemyGeneral.y);
-            var chessNumInPath = 0;
-            for (var i = minY + 1; i < maxY; i++) {
-                if (chessStatus[myGeneral.x + "," + i] != null) {
-                    chessNumInPath++;
-                }
-            }
-            if (chessNumInPath === 0) {
-                return true;
+        if (myGeneral.x !== enemyGeneral.x) {
+            return false;
+        }
+        //中间无子相隔
+        var minY = Math.min(myGeneral.y, enemyGeneral.y);
+        var maxY = Math.max(myGeneral.y, enemyGeneral.y);
+        for (var i = minY + 1; i < maxY; i++) {
+            if (chessStatus[myGeneral.x + "," + i] != null) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
