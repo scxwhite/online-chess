@@ -57,7 +57,7 @@
     window.onload = function () {
 
         var chessGame = new ChessGame();
-        var checkConnect, canStart;
+        var checkConnect, canStart, gameStart = false;
         if (!socket.connected()) {
             socket.connect("ws://127.0.0.1:8080/websocket");
         }
@@ -68,6 +68,19 @@
             //定时检测连接状态
             checkConnect = setInterval(checkConnect, 500);
         });
+        /**
+         * 收到消息的回调方法
+         * @param event
+         */
+        webSocket.onmessage = function (event) {
+            var data = JSON.parse(event.data);
+            if (data.type === "start") {
+                gameStart = true;
+                console.log("可以开始了")
+            }
+            console.log(event)
+            console.log(data)
+        };
 
         function checkConnect() {
             console.log("检测连接状态");
@@ -82,7 +95,7 @@
 
         function canStart() {
             console.log("检测匹配状态");
-            if (socket.canStart()) {
+            if (gameStart) {
                 clearInterval(canStart);
                 console.log("开始游戏")
                 chessGame.start();
