@@ -77,6 +77,7 @@ public class MyWebSocket {
             }
         } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.MOVE.getType())) {
             //移动棋子fg
+            log.info(socketMessage.getContent());
         }
     }
 

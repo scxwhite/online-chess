@@ -2,7 +2,7 @@ var Socket = function () {
     var oSocket = new Object();
     var socket, isConnect = false, canStart = false;
     oSocket.send = function (x) {
-        socket.send(x);
+        socket.send(JSON.stringify(x));
     };
     oSocket.connect = function (url) {
         if ('WebSocket' in window) {
@@ -49,10 +49,10 @@ var Socket = function () {
     };
     oSocket.canStart = function () {
         return canStart;
-    }
+    };
     return oSocket;
 };
-
+var socket = new Socket();
 function socketMessage(type, content) {
     this.type = type;
     this.content = content;

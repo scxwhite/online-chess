@@ -402,6 +402,9 @@ var ChessGame = function () {
         //判断胜利条件
         checkWin(pointY, user);
         //TODO  告知远程执行移动操作
+        if (user === myUser) {
+            socket.send(new socketMessage("move", pointX.x + "," + pointX.y + ";" + pointY.x + "," +pointY.y));
+        }
         return true;
     };
     /**
