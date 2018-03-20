@@ -56,7 +56,6 @@ var ChessGame = function () {
     function getCoordinateY(num) {
         return start.y + space * num;
     }
-
     /**
      * 判断是否过河
      **/
@@ -65,7 +64,6 @@ var ChessGame = function () {
         if (!isRed && point.y <= 4) return true;
         return false;
     }
-
     /**
      * 游戏结束
      **/
@@ -73,7 +71,6 @@ var ChessGame = function () {
         alert(myUser + ":" + msg);
         initData();
         initUI();
-
     }
     //在 (x,y)处绘制图片image
     function drawImage(image, x, y) {

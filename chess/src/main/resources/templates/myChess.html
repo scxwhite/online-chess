@@ -48,21 +48,50 @@
 
 <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
 <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
-<script th:src="@{/js/socket.js}" type="text/javascript"></script>
+<!--<script th:src="@{/js/socket.js}?time=New Date()" type="text/javascript"></script>-->
+<script src="/js/socket.js?version=20180351302221" type="text/javascript"></script>
 <script th:src="@{/js/chessGame.js}" type="text/javascript"></script>
 
 <script>
     window.onload = function () {
-        $('#prepare').on("click", function () {
-            var chessGame = new ChessGame();
-            var socket = new Socket();
-            chessGame.start();
-            socket.connect("ws://127.0.0.1:8080/online-chess/push");
-            if (socket.isConnect()) {
-                socket.send(555);
-            }
 
-        })
+        var socket = new Socket();
+        var chessGame = new ChessGame();
+        var checkConnect, canStart;
+        if (!socket.connected()) {
+            socket.connect("ws://127.0.0.1:8080/websocket");
+        }
+        $('#prepare').on("click", function () {
+            //TODO  排队中
+            while(!socket.connected()) {};
+
+            console.log("连接成功");
+            //请求变为准备状态
+            socket.send(JSON.stringify(new socketMessage("prepare", null)));
+            //定时检测连接状态
+            checkConnect = setInterval(checkConnect, 500);
+        });
+
+        function checkConnect() {
+            console.log("检测连接状态");
+            var status = socket.connected();
+            if (status) {
+                clearInterval(checkConnect);
+                //定时检测匹配状态
+                canStart = setInterval(canStart, 500);
+            }
+            return status;
+        }
+
+        function canStart() {
+            console.log("检测匹配状态");
+            if (socket.canStart()) {
+                clearInterval(canStart);
+                console.log("开始游戏")
+                chessGame.start();
+            }
+        }
+
     }
 </script>
 </html>
