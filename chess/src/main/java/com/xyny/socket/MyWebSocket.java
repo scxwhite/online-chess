@@ -59,6 +59,8 @@ public class MyWebSocket {
             if (chessQueue.size() == 0) {
                 chessQueue.add(session);
                 log.info("进入队列等待对手~~");
+            } else if (chessQueue.contains(session)) {
+                log.info("已经在等待中。。。");
             } else {
                 try {
                     Session other = chessQueue.take();
@@ -72,7 +74,7 @@ public class MyWebSocket {
                 }
             }
         } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.MOVE.getType())) {
-            //移动棋子fg
+            //移动棋子
             log.info(socketMessage.getContent());
             sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
         }
@@ -80,6 +82,13 @@ public class MyWebSocket {
 
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
+        Session other = isPlayingMap.get(session);
+        //如果此人正在游戏中   那么通知另外一个人 游戏赢了
+        if (other != null) {
+            sessionMap.get(other).sendMessage(SocketMessage.builder().type(ChessStatus.LEAVE.getType()).build());
+            isPlayingMap.remove(session);
+            isPlayingMap.remove(other);
+        }
         sessionMap.remove(session);
         this.session = null;
         log.info("拜拜,当前在线人数:{}人", sessionMap.size());

@@ -8,6 +8,7 @@ package com.xyny.model;
 public enum  ChessStatus {
     PREPARE("prepare"),
     MOVE("move"),
+    LEAVE("leave"),
     START("start");
 
     private String type;

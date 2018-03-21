@@ -59,9 +59,9 @@ var ChessGame = function () {
     /**
      * 判断是否过河
      **/
-    function crossRiver(isRed, point) {
-        if (isRed && point.y > 4) return true;
-        if (!isRed && point.y <= 4) return true;
+    function crossRiver(isOther, point) {
+        if (isOther && point.y > 4) return true;
+        if (!isOther && point.y <= 4) return true;
         return false;
     }
     /**
@@ -154,7 +154,6 @@ var ChessGame = function () {
             point = key.split(",");
             drawImage($('#' + chessStatus[key])[0], point[0], point[1]);
         }
-        ;
     }
 
 
@@ -229,38 +228,38 @@ var ChessGame = function () {
      *     保存初始时的象棋状态
      */
     function saveChessStatus() {
-        chessStatus["0,3"] = "red_army";
-        chessStatus["2,3"] = "red_army";
-        chessStatus["4,3"] = "red_army";
-        chessStatus["6,3"] = "red_army";
-        chessStatus["8,3"] = "red_army";
-        chessStatus["0,0"] = "red_car";
-        chessStatus["8,0"] = "red_car";
-        chessStatus["1,0"] = "red_horse";
-        chessStatus["7,0"] = "red_horse";
-        chessStatus["2,0"] = "red_elephant";
-        chessStatus["6,0"] = "red_elephant";
-        chessStatus["3,0"] = "red_soldier";
-        chessStatus["5,0"] = "red_soldier";
-        chessStatus["1,2"] = "red_cannon";
-        chessStatus["7,2"] = "red_cannon";
-        chessStatus["4,0"] = "red_general";
-        chessStatus["0,6"] = "black_army";
-        chessStatus["2,6"] = "black_army";
-        chessStatus["4,6"] = "black_army";
-        chessStatus["6,6"] = "black_army";
-        chessStatus["8,6"] = "black_army";
-        chessStatus["0,9"] = "black_car";
-        chessStatus["8,9"] = "black_car";
-        chessStatus["1,9"] = "black_horse";
-        chessStatus["7,9"] = "black_horse";
-        chessStatus["2,9"] = "black_elephant";
-        chessStatus["6,9"] = "black_elephant";
-        chessStatus["3,9"] = "black_soldier";
-        chessStatus["5,9"] = "black_soldier";
-        chessStatus["1,7"] = "black_cannon";
-        chessStatus["7,7"] = "black_cannon";
-        chessStatus["4,9"] = "black_general";
+        chessStatus["0,3"] = otherUser + "_army";
+        chessStatus["2,3"] = otherUser + "_army";
+        chessStatus["4,3"] = otherUser + "_army";
+        chessStatus["6,3"] = otherUser + "_army";
+        chessStatus["8,3"] = otherUser + "_army";
+        chessStatus["0,0"] = otherUser + "_car";
+        chessStatus["8,0"] = otherUser + "_car";
+        chessStatus["1,0"] = otherUser + "_horse";
+        chessStatus["7,0"] = otherUser + "_horse";
+        chessStatus["2,0"] = otherUser + "_elephant";
+        chessStatus["6,0"] = otherUser + "_elephant";
+        chessStatus["3,0"] = otherUser + "_soldier";
+        chessStatus["5,0"] = otherUser + "_soldier";
+        chessStatus["1,2"] = otherUser + "_cannon";
+        chessStatus["7,2"] = otherUser + "_cannon";
+        chessStatus["4,0"] = otherUser + "_general";
+        chessStatus["0,6"] = myUser + "_army";
+        chessStatus["2,6"] = myUser + "_army";
+        chessStatus["4,6"] = myUser + "_army";
+        chessStatus["6,6"] = myUser + "_army";
+        chessStatus["8,6"] = myUser + "_army";
+        chessStatus["0,9"] = myUser + "_car";
+        chessStatus["8,9"] = myUser + "_car";
+        chessStatus["1,9"] = myUser + "_horse";
+        chessStatus["7,9"] = myUser + "_horse";
+        chessStatus["2,9"] = myUser + "_elephant";
+        chessStatus["6,9"] = myUser + "_elephant";
+        chessStatus["3,9"] = myUser + "_soldier";
+        chessStatus["5,9"] = myUser + "_soldier";
+        chessStatus["1,7"] = myUser + "_cannon";
+        chessStatus["7,7"] = myUser + "_cannon";
+        chessStatus["4,9"] = myUser + "_general";
     }
 
     /**
@@ -306,6 +305,8 @@ var ChessGame = function () {
             canvas_jquery.on('click', function (e) {
                 //得到距离鼠标最近的画布坐标
                 var nearest = getNearestCoordinate(getPointOnCanvas(e.clientX, e.clientY));
+                console.log(nearest.x + " " + nearest.y);
+                console.log(myUser + "  " + otherUser);
                 var currChess = chessStatus[nearest.x + "," + nearest.y];
                 if (currChess === null) {
                     //如果已经选中己方棋子并且第一次点击空空棋盘位置 准备移动
@@ -313,6 +314,7 @@ var ChessGame = function () {
                         firstClick = oChessGame.chessMove(clickChess, nearest, myUser);
                         //如果第一次点击空白区域  不做任何处理
                     } else {
+                        console.log("请选择你的棋子哦")
                         return;
                     }
                     //如果当前点击的棋子是当前用户
@@ -327,16 +329,11 @@ var ChessGame = function () {
                     if (!firstClick) {
                         oChessGame.chessMove(clickChess, nearest, myUser);
                     } else {
-                        alert("只能移动" + myUser + "方棋子哦");
+                        console.log("只能移动" + myUser + "方棋子哦");
                     }
                 }
             });
-            $('#changeUser').on('click', function () {
-                var tmp = myUser;
-                myUser = otherUser;
-                otherUser = tmp;
-                changeGeneral();
-            });
+
         }
 
         /**
@@ -379,7 +376,9 @@ var ChessGame = function () {
      * @param user  当前移动的用户
      **/
     oChessGame.chessMove = function (pointX, pointY, user) {
-
+        console.log(JSON.stringify(pointX))
+        console.log(JSON.stringify(pointY))
+        console.log(JSON.stringify(user))
         var chessName = chessStatus[pointX.x + "," + pointX.y];
         if (chessName === null || !canMove(chessName, pointX, pointY)) {
             return false;
@@ -491,7 +490,7 @@ var ChessGame = function () {
      **/
     function canMove(chessName, pointX, pointY) {
         chessName = chessName.split("_");
-        var isRed = chessName[0] === "red";
+        var isOther = chessName[0] === otherUser;
         var tmp_x, tmp_y;
         //士
         if (chessName[1] === "soldier") {
@@ -517,7 +516,7 @@ var ChessGame = function () {
         //相
         if (chessName[1] === "elephant") {
             //不能过河
-            if (crossRiver(isRed, pointY)) return false;
+            if (crossRiver(isOther, pointY)) return false;
             //右下方移动
             tmp_x = pointX.x + 1, tmp_y = pointX.y + 1;
             if (pointX.x + 2 === pointY.x && pointX.y + 2 === pointY.y && chessStatus[tmp_x + "," + tmp_y] == null) return true;
@@ -579,14 +578,14 @@ var ChessGame = function () {
         //兵
         if (chessName[1] === "army") {
             //未过河 只能前进
-            if (isRed) {
+            if (isOther) {
                 //前进
                 if (pointX.x === pointY.x && pointX.y + 1 === pointY.y) return true;
             } else {
                 if (pointX.x === pointY.x && pointX.y - 1 === pointY.y) return true;
             }
             //过河可以横着走
-            if (crossRiver(isRed, pointY)) {
+            if (crossRiver(isOther, pointY)) {
                 //横着走
                 if (pointX.x + 1 === pointY.x && pointX.y === pointY.y) return true;
                 if (pointX.x - 1 === pointY.x && pointX.y === pointY.y) return true;
@@ -679,8 +678,8 @@ var ChessGame = function () {
         if (chessName[1] === "general") {
             //边界检测
             if (pointY.x < 3 || pointY.x > 5) return false;
-            if (isRed && pointY.y > 2) return false;
-            if (!isRed && pointY.y < 7) return false;
+            if (isOther && pointY.y > 2) return false;
+            if (!isOther && pointY.y < 7) return false;
             //右
             if (pointX.x + 1 === pointY.x && pointX.y === pointY.y) return true;
             //左

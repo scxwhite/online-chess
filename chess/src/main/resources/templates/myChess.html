@@ -21,6 +21,34 @@
             top: 50%;
             transform: translateY(-50%);
         }
+        .beat-char {
+            line-height: 3.4em;
+            position: relative;
+            display: inline-block;
+            background: transparent;
+
+        }
+        .rotate{
+            transform:rotate(360deg) ;
+            -ms-transform:rotate(360deg); 	/* IE 9 */
+            -moz-transform:rotate(360deg); 	/* Firefox */
+            -webkit-transform:rotate(360deg); /* Safari 和 Chrome */
+            -o-transform:rotate(360deg);
+            -webkit-transition-duration: 0.7s;
+
+        }
+        #roloadText{
+            text-align:center;
+            font-size: 30px;
+            font-weight: bold;
+            position: fixed;
+            top: 45%;
+            left: 45%;
+            background-color : black;
+            text-shadow : rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+            -webkit-background-clip : text;
+            color:hsl(10,100%,40%);
+        }
     </style>
 </head>
 
@@ -44,14 +72,17 @@
         <img th:src="@{/img/chess/red_soldier.gif}" id="red_soldier">
         <img th:src="@{/img/chess/black_soldier.gif}" id="black_soldier">
     </div>
+    <h2 id="roloadText" style="display: none;">正在匹配中...</h2>
 </body>
 
 <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.beattext.js}" type="text/javascript"></script>
+<script th:src="@{/js/easying.js}" type="text/javascript"></script>
 <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
 <!--<script th:src="@{/js/socket.js}?time=New Date()" type="text/javascript"></script>-->
 <!--<script th:src="@{/js/chessGame.js}" type="text/javascript"></script>-->
-<script src="/js/socket.js?version=200141" type="text/javascript"></script>
-<script src="/js/chessGame.js?version=200411" type="text/javascript"></script>
+<script src="/js/socket.js?version=20022141" type="text/javascript"></script>
+<script src="/js/chessGame.js?version=201024211" type="text/javascript"></script>
 
 
 <script>
@@ -59,11 +90,13 @@
 
         var chessGame = new ChessGame();
         var checkConnect, canStart, gameStart = false;
+
         if (!socket.connected()) {
-            socket.connect("ws://127.0.0.1:8080/websocket");
+            socket.connect("ws://10.1.87.136:8080/websocket");
         }
         $('#prepare').on("click", function () {
-            //TODO  排队中 动画
+            //排队中 动画
+            $('#roloadText').css({"display" : ""}).beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:100,downTime:100});
             //请求变为准备状态
             socket.send(new socketMessage("prepare", null));
             //定时检测连接状态
@@ -75,9 +108,9 @@
          */
         webSocket.onmessage = function (event) {
             var data = JSON.parse(event.data);
+            console.log(data)
             if (data.type === "start") {
                 gameStart = true;
-                console.log("可以开始了")
             } else if (data.type === "move") {
                 var content = data.content.split(";");
                 var firstPoint = content[0].split(",");
@@ -85,9 +118,20 @@
                 var pointX = new Coordinate(parseInt(firstPoint[0]), parseInt(firstPoint[1]));
                 var pointY = new Coordinate(parseInt(secondPoint[0]), parseInt(secondPoint[1]));
                 chessGame.chessMove(pointX, pointY, otherUser);
+            } else if (data.type === "leave") {
+                setText("由于对方离开，恭喜你 ，你赢了");
+                setTimeout(closeText, 3000);
+                //TODO  显示排行榜
             }
-            console.log(data)
         };
+
+        function setText(msg) {
+            $('#roloadText').text(msg).css({"display":""}).beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:100,downTime:100});
+        }
+
+        function closeText() {
+            $('#roloadText').css({"display" : "none"})
+        }
 
         function checkConnect() {
             console.log("检测连接状态");
@@ -103,11 +147,18 @@
         function canStart() {
             console.log("检测匹配状态");
             if (gameStart) {
+                closeText();
                 clearInterval(canStart);
                 console.log("开始游戏")
                 chessGame.start();
             }
         }
+        $('#changeUser').on('click', function () {
+            var tmp = myUser;
+            myUser = otherUser;
+            otherUser = tmp;
+         //   changeGeneral();
+        });
     }
 </script>
 </html>
