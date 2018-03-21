@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>象棋盘</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
     <style >
         html {
@@ -21,11 +20,16 @@
         }
 
         canvas{
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+            position: fixed;
+            left: 20%;
+            top: 10%;
 
+        }
+        #chat {
+            position: fixed;
+            right:5%;
+            top:20%;
+        }
         .beat-char {
             line-height: 3.4em;
             position: relative;
@@ -54,14 +58,35 @@
             background-color : black;
             text-shadow : rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
             -webkit-background-clip : text;
-            color:hsl(10,100%,40%);
+            color:hsl(10, 100%, 40%);
         }
-
+        #msgText, #confirmSend, #allMsg{
+            border:1px #52ff49 solid;
+            color: black;
+            background:rgba(0, 0, 0, 0);
+            font-weight: bold;
+            font-family: Cambria;
+        }
     </style>
 </head>
 
 <body>
-    <canvas id="canvas" class="center-block center " width="540" height="600"></canvas>
+    <canvas id="canvas"  width="540" height="600"></canvas>
+    <div id="chat" >
+        <textarea id="allMsg" style="width: 100%; height: 90%;resize: none;" disabled>
+
+        </textarea>
+        <div class="col-lg-6" style="height: 10%;width: 100%;">
+            <div class="input-group">
+                <input id="msgText" type="text" class="form-control" style="border:1px #52ff49 solid;background:rgba(0, 0, 0, 0);">
+                <span class="input-group-btn">
+						<button class="btn btn-default" type="button" id="confirmSend">
+                            发送
+						</button>
+					</span>
+            </div>
+        </div>
+    </div>
     <button class="btn btn-primary" id="changeUser">切换角色</button>
     <button class="btn btn-primary" id="prepare">准备</button>
     <div style="display: none">
@@ -95,10 +120,15 @@
 
 <script>
     window.onload = function () {
-
+        var windowWidth = window.screen.width;
+        var windowHeight = window.screen.height;
         var chessGame = new ChessGame();
         var checkConnect, canStart, gameStart = false;
+        //TODO  测试定位
 
+        $('#canvas').css({"width" : windowWidth * 0.6, "height" : windowHeight * 0.8});
+        $('#chat').css({"width" : windowWidth * 0.2, "height" : windowHeight * 0.6});
+        chessGame.start();
         if (!socket.connected()) {
             socket.connect("ws://10.1.87.136:8080/websocket");
         }
@@ -110,6 +140,19 @@
             //定时检测连接状态
             checkConnect = setInterval(checkConnect, 500);
         });
+
+        $('#confirmSend').on('click', function () {
+            var msg = $('#msgText').val();
+            if (msg === undefined || msg === null || msg === "") {
+                return ;
+            }
+            socket.send(new socketMessage("chat", msg));
+            toChat(msg, myUser);
+        });
+
+        function toChat(msg, user) {
+            $('#allMsg').text($('#allMsg').text()+ "\n" + "[" + user  + "]:"  + msg + "\t\t\t\t" + getLocalTime(new Date().getTime()));
+        }
         /**
          * 收到消息的回调方法
          * @param event
@@ -135,6 +178,8 @@
                 setText("由于对方离开，恭喜你 ，你赢了", 2);
 
                 //TODO  显示排行榜
+            } else if (data.type === "chat") {
+                toChat(data.content, otherUser);
             }
         };
 
@@ -169,8 +214,11 @@
             var tmp = myUser;
             myUser = otherUser;
             otherUser = tmp;
-      //      changeGeneral();
         });
+    };
+
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
     }
 </script>
 </html>

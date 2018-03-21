@@ -9,6 +9,7 @@ public enum  ChessStatus {
     PREPARE("prepare"),
     MOVE("move"),
     LEAVE("leave"),
+    CHAT("chat"),
     START("start");
 
     private String type;

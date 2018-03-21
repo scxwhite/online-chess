@@ -4,10 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java" line="60" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c26d46f-a38d-4baf-adbf-84e593d5a540" name="Default" comment="">
+    <list default="true" id="6c26d46f-a38d-4baf-adbf-84e593d5a540" name="Default" comment="根据时间判断先手">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/src/main/java/com/xyny/model/ChessStatus.java" afterPath="$PROJECT_DIR$/chess/src/main/java/com/xyny/model/ChessStatus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java" afterPath="$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js" afterPath="$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html" afterPath="$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html" />
     </list>
     <ignored path="$PROJECT_DIR$/chess/target/" />
@@ -24,10 +24,13 @@
       <file leaf-file-name="myChess.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="110" column="43" lean-forward="false" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
+            <state relative-caret-position="165">
+              <caret line="159" column="23" lean-forward="false" selection-start-line="159" selection-start-column="23" selection-end-line="159" selection-end-column="23" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#textarea#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h2#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -44,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chessGame.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chessGame.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="600">
+              <caret line="35" column="12" lean-forward="true" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
               <folding>
                 <element signature="e#7948#9549#0" expanded="false" />
                 <element signature="e#9618#10072#0" expanded="false" />
@@ -58,15 +61,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyWebSocket.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MyWebSocket.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="76" column="33" lean-forward="false" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
+            <state relative-caret-position="107">
+              <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3907#3908#0" expanded="true" />
-                <element signature="e#3942#3943#0" expanded="true" />
+                <element signature="e#4083#4084#0" expanded="true" />
+                <element signature="e#4118#4119#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,11 +78,11 @@
       <file leaf-file-name="ChessStatus.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/model/ChessStatus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+            <state relative-caret-position="242">
+              <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
               <folding>
-                <element signature="e#302#303#0" expanded="true" />
-                <element signature="e#329#330#0" expanded="true" />
+                <element signature="e#320#321#0" expanded="true" />
+                <element signature="e#347#348#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,8 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>initUI</find>
-      <find>initData</find>
       <find>enemyGeneral</find>
       <find>getAllRerunDetail</find>
       <find>webs</find>
@@ -150,6 +151,8 @@
       <find>changegen</find>
       <find>setText</find>
       <find>将军</find>
+      <find>准备</find>
+      <find>canvasWidth</find>
     </findStrings>
     <replaceStrings>
       <replace>otherUser + &quot;</replace>
@@ -177,9 +180,9 @@
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xyny/model/SocketMessage.java" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/static/js/socket.js" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/static/js/jquery.beattext.js" />
+        <option value="$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js" />
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xyny/model/ChessStatus.java" />
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java" />
-        <option value="$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html" />
       </list>
     </option>
@@ -403,6 +406,44 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="online-chess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="online-chess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -421,7 +462,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/gitRepository/dag-graph" />
+    <property name="last_opened_file_path" value="D:/gitRepository/pandora" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -1184,10 +1225,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57092000" />
+    <option name="totallyTimeSpent" value="61562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1210,7 +1252,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33035713" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33035713" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16897655" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1232,15 +1274,19 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3848684" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31808037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3611557" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1256,7 +1302,21 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java</url>
+          <line>100</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java</url>
+          <line>65</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1400,9 +1460,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-88">
           <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1418,7 +1475,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1426,18 +1482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/model/ChessStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="e#302#303#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1451,14 +1495,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java">
+    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/model/ChessStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="76" column="33" lean-forward="false" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
+        <state relative-caret-position="242">
+          <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3907#3908#0" expanded="true" />
-            <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="e#320#321#0" expanded="true" />
+            <element signature="e#347#348#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1473,10 +1516,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/myChess.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="110" column="43" lean-forward="false" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
+        <state relative-caret-position="165">
+          <caret line="159" column="23" lean-forward="false" selection-start-line="159" selection-start-column="23" selection-end-line="159" selection-end-column="23" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h2#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
@@ -1484,12 +1530,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="600">
+          <caret line="35" column="12" lean-forward="true" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
           <folding>
             <element signature="e#7948#9549#0" expanded="false" />
             <element signature="e#9618#10072#0" expanded="false" />
             <element signature="e#10097#10200#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xyny/socket/MyWebSocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4083#4084#0" expanded="true" />
+            <element signature="e#4118#4119#0" expanded="true" />
           </folding>
         </state>
       </provider>

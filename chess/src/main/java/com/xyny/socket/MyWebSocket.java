@@ -91,6 +91,8 @@ public class MyWebSocket {
             //移动棋子
             log.info(socketMessage.getContent());
             sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
+        } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.CHAT.getType())) {
+            sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
         }
     }
 
