@@ -96,16 +96,23 @@ public class MyWebSocket {
 
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
-        Session other = isPlayingMap.get(session);
-        //如果此人正在游戏中   那么通知另外一个人 游戏赢了
-        if (other != null) {
-            sessionMap.get(other).sendMessage(SocketMessage.builder().type(ChessStatus.LEAVE.getType()).build());
-            isPlayingMap.remove(session);
-            isPlayingMap.remove(other);
+
+
+        try {
+            Session other = isPlayingMap.get(session);
+            //如果此人正在游戏中   那么通知另外一个人 游戏赢了
+            if (other != null) {
+                sessionMap.get(other).sendMessage(SocketMessage.builder().type(ChessStatus.LEAVE.getType()).build());
+                isPlayingMap.remove(session);
+                isPlayingMap.remove(other);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            sessionMap.remove(session);
+            this.session = null;
+            log.info("拜拜,当前在线人数:{}人", sessionMap.size());
         }
-        sessionMap.remove(session);
-        this.session = null;
-        log.info("拜拜,当前在线人数:{}人", sessionMap.size());
     }
 
     @OnError

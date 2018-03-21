@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>象棋盘</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
     <style >
         html {
@@ -102,6 +101,7 @@
         if (!socket.connected()) {
             socket.connect("ws://10.1.87.136:8080/websocket");
         }
+
         $('#prepare').on("click", function () {
             //排队中 动画
             setText("正在匹配中...", 1);
