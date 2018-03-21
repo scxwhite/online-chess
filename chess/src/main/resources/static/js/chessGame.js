@@ -1,5 +1,6 @@
 var myUser = 'black';
 var otherUser = 'red';
+var turnMe = true;
 /**
  * 坐标对象
  * @param x    x坐标
@@ -8,6 +9,22 @@ var otherUser = 'red';
 function Coordinate(x, y) {
     this.x = x;
     this.y = y;
+}
+
+/**
+ * 设置文字
+ * @param msg   文字内容
+ * @param type  类型   1：不关闭文字  2：3s后关闭文字
+ */
+function setText(msg, type) {
+    $('#gameHints').text(msg).css({"display":""}).beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:100,downTime:100});
+    if (type === 2) {
+        setTimeout(closeText, 3000);
+    }
+}
+
+function closeText() {
+    $('#gameHints').css({"display" : "none"})
 }
 var ChessGame = function () {
     var oChessGame = new Object();
@@ -68,7 +85,7 @@ var ChessGame = function () {
      * 游戏结束
      **/
     function gameOver(msg) {
-        alert(myUser + ":" + msg);
+        setText(msg, 2);
         initData();
         initUI();
     }
@@ -305,17 +322,12 @@ var ChessGame = function () {
             canvas_jquery.on('click', function (e) {
                 //得到距离鼠标最近的画布坐标
                 var nearest = getNearestCoordinate(getPointOnCanvas(e.clientX, e.clientY));
-                console.log(nearest.x + " " + nearest.y);
-                console.log(myUser + "  " + otherUser);
                 var currChess = chessStatus[nearest.x + "," + nearest.y];
                 if (currChess === null) {
                     //如果已经选中己方棋子并且第一次点击空空棋盘位置 准备移动
-                    if (!firstClick) {
+                    if (!firstClick && turnMe) {
                         firstClick = oChessGame.chessMove(clickChess, nearest, myUser);
                         //如果第一次点击空白区域  不做任何处理
-                    } else {
-                        console.log("请选择你的棋子哦")
-                        return;
                     }
                     //如果当前点击的棋子是当前用户
                 } else if (currChess.split("_")[0] === myUser) {
@@ -326,10 +338,11 @@ var ChessGame = function () {
                     firstClick = false;
                     drawSelectTag(nearest);
                 } else if (currChess.split("_")[0] === otherUser) {
+                    //尺子
                     if (!firstClick) {
                         oChessGame.chessMove(clickChess, nearest, myUser);
                     } else {
-                        console.log("只能移动" + myUser + "方棋子哦");
+                        setText("只能移动" + myUser + "方棋子哦", 2);
                     }
                 }
             });
@@ -376,20 +389,18 @@ var ChessGame = function () {
      * @param user  当前移动的用户
      **/
     oChessGame.chessMove = function (pointX, pointY, user) {
-        console.log(JSON.stringify(pointX))
-        console.log(JSON.stringify(pointY))
-        console.log(JSON.stringify(user))
         var chessName = chessStatus[pointX.x + "," + pointX.y];
         if (chessName === null || !canMove(chessName, pointX, pointY)) {
             return false;
         }
+
         chessStatus[pointX.x + "," + pointX.y] = null;
         chessStatus[pointY.x + "," + pointY.y] = chessName;
         drawImage($('#' + chessName)[0], pointY.x, pointY.y);
         //重绘棋盘
         initUI();
         ctx.save();
-        //记录地方老将的位置
+        //记录敌方老将的位置
         if (chessName === otherUser + "_general") {
             enemyGeneral = pointY;
         }
@@ -403,23 +414,26 @@ var ChessGame = function () {
         checkWin(pointY, user);
         //TODO  告知远程执行移动操作
         if (user === myUser) {
-            changePoint(pointX);
-            changePoint(pointY);
-            socket.send(new socketMessage("move", pointX.x + "," + pointX.y + ";" + pointY.x + "," +pointY.y));
+            turnMe = false;
+            var source = changePoint(pointX);
+            var target = changePoint(pointY);
+            socket.send(new socketMessage("move", source.x + "," + source.y + ";" + target.x + "," +target.y));
+        } else {
+            turnMe = true;
         }
-        console.log("移动完成")
+
         return true;
     };
     function changePoint(point) {
-        point.x = -point.x + xNum - 1;
-        point.y = -point.y + yNum - 1;
+        return new Coordinate(-point.x + xNum - 1, -point.y + yNum - 1);
     }
 
     /**
      * 是否将军操作检验
      */
     function check() {
-        var chessName, point, tempGeneral;
+
+        var chessName = "", point, tempGeneral;
         for (var key in chessStatus) {
             chessName = chessStatus[key];
             if (chessName === null) continue;
@@ -430,8 +444,7 @@ var ChessGame = function () {
                 tempGeneral = myGeneral;
             }
             if (canMove(chessName, point, tempGeneral)) {
-                console.log(chessName + ",(" + point.x + "," + point.y + ")," + "(" + tempGeneral.x + "," + tempGeneral.y + ")")
-                alert("将军！！！！！！");
+                setText("将军", 2);
                 return;
             }
         }
@@ -555,7 +568,6 @@ var ChessGame = function () {
             }
             //上下移动
             if (tmp_x === pointY.x) {
-                console.log("车上下移动");
                 //向上移动
                 while (--tmp_y > pointY.y) {
                     //如果移动路径上有其它棋子 直接返回
@@ -655,9 +667,7 @@ var ChessGame = function () {
                         chessNumOnPath++;
                     }
                 }
-                if (pointX.x === 4 && pointX.y === 7) {
-                    console.log(chessNumOnPath)
-                }
+
 
                 tmp_y = pointX.y;
                 //下
