@@ -325,7 +325,7 @@ var ChessGame = function () {
                 var currChess = chessStatus[nearest.x + "," + nearest.y];
                 if (currChess === null) {
                     //如果已经选中己方棋子并且第一次点击空空棋盘位置 准备移动
-                    if (!firstClick && turnMe) {
+                    if (!firstClick) {
                         firstClick = oChessGame.chessMove(clickChess, nearest, myUser);
                         //如果第一次点击空白区域  不做任何处理
                     }
@@ -349,14 +349,6 @@ var ChessGame = function () {
 
         }
 
-        /**
-         * 角色互换
-         **/
-        function changeGeneral() {
-            var tempGeneral = myGeneral;
-            myGeneral = enemyGeneral;
-            enemyGeneral = tempGeneral;
-        }
 
         /**
          * 四舍五入计算最近的棋盘位置
@@ -389,9 +381,22 @@ var ChessGame = function () {
      * @param user  当前移动的用户
      **/
     oChessGame.chessMove = function (pointX, pointY, user) {
+        console.log("我方老将位置" + JSON.stringify(myGeneral));
+        console.log("敌方老将位置" + JSON.stringify(enemyGeneral));
         var chessName = chessStatus[pointX.x + "," + pointX.y];
-        if (chessName === null || !canMove(chessName, pointX, pointY)) {
+        if (chessName === null || !canMove(chessName, pointX, pointY) || (user === myUser && !turnMe) || (user === otherUser && turnMe)) {
             return false;
+        }
+        //告知远程执行结果
+        if (user === myUser && turnMe) {
+            turnMe = false;
+            var source = changePoint(pointX);
+            var target = changePoint(pointY);
+            socket.send(new socketMessage("move", source.x + "," + source.y + ";" + target.x + "," +target.y));
+        }
+        //切换到自己下子
+        if (user === otherUser && !turnMe){
+            turnMe = true;
         }
 
         chessStatus[pointX.x + "," + pointX.y] = null;
@@ -412,15 +417,7 @@ var ChessGame = function () {
         check();
         //判断胜利条件
         checkWin(pointY, user);
-        //TODO  告知远程执行移动操作
-        if (user === myUser) {
-            turnMe = false;
-            var source = changePoint(pointX);
-            var target = changePoint(pointY);
-            socket.send(new socketMessage("move", source.x + "," + source.y + ";" + target.x + "," +target.y));
-        } else {
-            turnMe = true;
-        }
+
 
         return true;
     };

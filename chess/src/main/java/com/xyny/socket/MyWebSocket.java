@@ -66,8 +66,22 @@ public class MyWebSocket {
                     Session other = chessQueue.take();
                     isPlayingMap.put(session, other);
                     isPlayingMap.put(other, session);
-                    sessionMap.get(session).sendMessage(SocketMessage.builder().type(ChessStatus.START.getType()).build());
-                    sessionMap.get(other).sendMessage(SocketMessage.builder().type(ChessStatus.START.getType()).build());
+                    SocketMessage first = SocketMessage
+                            .builder()
+                            .type(ChessStatus.START.getType())
+                            .build();
+                    SocketMessage second = SocketMessage
+                            .builder()
+                            .type(ChessStatus.START.getType())
+                            .build();
+                    //根据当前时间判断谁先手
+                    if (System.currentTimeMillis() % 2 == 0) {
+                        first.setContent("you first");
+                    } else {
+                        second.setContent("you first");
+                    }
+                    sessionMap.get(session).sendMessage(first);
+                    sessionMap.get(other).sendMessage(second);
                     log.info("找到对手~~");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -106,5 +120,4 @@ public class MyWebSocket {
             e.printStackTrace();
         }
     }
-
 }
