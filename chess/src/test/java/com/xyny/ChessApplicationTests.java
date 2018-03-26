@@ -12,5 +12,4 @@ public class ChessApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Override
-    public Integer loginCheck(User user) {
-        return 0;
+    public boolean loginCheck(User user) {
+        return true;
     }
 }

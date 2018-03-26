@@ -1,202 +1,208 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:pd="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="UTF-8">
-		<title>象棋盘</title>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>象棋盘</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <style >
+        html {
+            margin:0 auto;
+            padding:0;
+            height: 100%;
+            width: 100%;
+        }
 
-	<body>
-		<canvas id="canvas1" style="background-color:burlywood" width="1005" height="1105">不支持Canvas</canvas>
-		<img src="img/blue-ju.gif" id="ju" hidden="hidden" />
-		<img src="img/blue-ma.gif" id="ma" hidden="hidden" />
-		<img src="img/blue-xiang.gif" id="xiang" hidden="hidden" />
-		<img src="img/blue-shi.gif" id="shi" hidden="hidden" />
-		<img src="img/blue-jiang.gif" id="jiang" hidden="hidden" />
-		<img src="img/blue-pao.gif" id="pao" hidden="hidden" />
-		<img src="img/blue-bing.gif" id="bing" hidden="hidden" />
+        body {
+            background: url("../img/background/battle.jpg") center no-repeat fixed;
+            background-size: 100% 100%;
+            height: 100%;
+            width: 100%;
+        }
 
-		<img src="img/red-ju.gif" id="r_ju" hidden="hidden" />
-		<img src="img/red-ma.gif" id="r_ma" hidden="hidden" />
-		<img src="img/red-xiang.gif" id="r_xiang" hidden="hidden" />
-		<img src="img/red-shi.gif" id="r_shi" hidden="hidden" />
-		<img src="img/red-jiang.gif" id="r_jiang" hidden="hidden" />
-		<img src="img/red-pao.gif" id="r_pao" hidden="hidden" />
-		<img src="img/red-bing.gif" id="r_bing" hidden="hidden" />
-		<script type="text/javascript">
-			var object = {
-				//初始化
-				init: function() {
-					//棋盘外框
-					var canvas1 = document.getElementById("canvas1");
-					this.ctx = canvas1.getContext("2d");
-					this.ctx.lineWidth = 5;
-					this.ctx.strokeStyle = "brown";
-					this.ctx.strokeRect(100, 100, 800, 900);
+        canvas{
+            position: fixed;
+            left: 30%;
+            top: 10%;
 
-					this.row();
-					this.cols();
-					this.drawFont();
-					//注意：现在的原点中心为（100,100），所以下面的所有坐标在原来的基础上加（x+100,y+100）；
-					//中心点一（1000,200）
-					this.center(200, 300);
-					//中心点二（700,200）
-					this.center(800, 300);
-					//中心点三（5,300）
-					this.center(105, 400);
-					//中心点四（200,300）
-					this.center(300, 400);
-					//中心点五（400,300）
-					this.center(500, 400);
-					//中心点六（600,300）
-					this.center(700, 400);
-					//中心点七（800,300）
-					this.center(900, 400);
-					//中心点八（800,600）
-					this.center(900, 700);
-					//中心点九（600,600）
-					this.center(700, 700);
-					//中心点十（400,600）
-					this.center(500, 700);
-					//中心点十一（200,600）
-					this.center(300, 700);
-					//中心点十二（5,600）
-					this.center(105, 700);
-					//中心点十三（700,700）
-					this.center(800, 800);
-					//中心点十四（100,700）
-					this.center(200, 800);
+        }
+        #chat {
+            position: fixed;
+            right:5%;
+            top:20%;
+        }
+        .beat-char {
+            line-height: 3.4em;
+            position: relative;
+            display: inline-block;
+            background: transparent;
 
-					//必须当页面中的图片资源加载成功,再画棋子
-					window.onload = function() {
-						//棋子图片
-						var ju = document.getElementById("ju");
-						var ma = document.getElementById("ma");
-						var xiang = document.getElementById("xiang");
-						var shi = document.getElementById("shi");
-						var jiang = document.getElementById("jiang");
-						var bing = document.getElementById("bing");
-						var pao = document.getElementById("pao");
+        }
 
-						var r_ju = document.getElementById("r_ju");
-						var r_ma = document.getElementById("r_ma");
-						var r_xiang = document.getElementById("r_xiang");
-						var r_shi = document.getElementById("r_shi");
-						var r_jiang = document.getElementById("r_jiang");
-						var r_bing = document.getElementById("r_bing");
-						var r_pao = document.getElementById("r_pao");
-						//将棋子图像绘制到画布上
-						object.ctx.drawImage(ju, 50, 50, 100, 100);
-						object.ctx.drawImage(ma, 150, 50, 100, 100);
-						object.ctx.drawImage(xiang, 250, 50, 100, 100);
-						object.ctx.drawImage(shi, 350, 50, 100, 100);
-						object.ctx.drawImage(jiang, 450, 50, 100, 100);
-						object.ctx.drawImage(shi, 550, 50, 100, 100);
-						object.ctx.drawImage(xiang, 650, 50, 100, 100);
-						object.ctx.drawImage(ma, 750, 50, 100, 100);
-						object.ctx.drawImage(ju, 850, 50, 100, 100);
-						object.ctx.drawImage(pao, 150, 250, 100, 100);
-						object.ctx.drawImage(pao, 750, 250, 100, 100);
-						object.ctx.drawImage(bing, 50, 350, 100, 100);
-						object.ctx.drawImage(bing, 250, 350, 100, 100);
-						object.ctx.drawImage(bing, 450, 350, 100, 100);
-						object.ctx.drawImage(bing, 650, 350, 100, 100);
-						object.ctx.drawImage(bing, 850, 350, 100, 100);
+        .rotate{
+            transform:rotate(360deg) ;
+            -ms-transform:rotate(360deg); 	/* IE 9 */
+            -moz-transform:rotate(360deg); 	/* Firefox */
+            -webkit-transform:rotate(360deg); /* Safari 和 Chrome */
+            -o-transform:rotate(360deg);
+            -webkit-transition-duration: 0.7s;
 
-						object.ctx.drawImage(r_ju, 50, 950, 100, 100);
-						object.ctx.drawImage(r_ma, 150, 950, 100, 100);
-						object.ctx.drawImage(r_xiang, 250, 950, 100, 100);
-						object.ctx.drawImage(r_shi, 350, 950, 100, 100);
-						object.ctx.drawImage(r_jiang, 450, 950, 100, 100);
-						object.ctx.drawImage(r_shi, 550, 950, 100, 100);
-						object.ctx.drawImage(r_xiang, 650, 950, 100, 100);
-						object.ctx.drawImage(r_ma, 750, 950, 100, 100);
-						object.ctx.drawImage(r_ju, 850, 950, 100, 100);
-						object.ctx.drawImage(r_pao, 150, 750, 100, 100);
-						object.ctx.drawImage(r_pao, 750, 750, 100, 100);
-						object.ctx.drawImage(r_bing, 50, 650, 100, 100);
-						object.ctx.drawImage(r_bing, 250, 650, 100, 100);
-						object.ctx.drawImage(r_bing, 450, 650, 100, 100);
-						object.ctx.drawImage(r_bing, 650, 650, 100, 100);
-						object.ctx.drawImage(r_bing, 850, 650, 100, 100);
+        }
 
-					}
-				},
-				//此方法用来画棋盘线
-				LineDrawing: function(mx, my, lx, ly) {
-					this.ctx.beginPath();
-					this.ctx.moveTo(mx, my);
-					this.ctx.lineTo(lx, ly);
-					this.ctx.stroke();
-				},
-				//棋盘行
-				row: function() {
-					for(var i = 200; i <= 900; i += 100) {
-						this.ctx.beginPath();
-						this.ctx.moveTo(105, i);
-						this.ctx.lineTo(900, i);
-						this.ctx.stroke();
-					}
-				},
-				//棋盘列
-				cols: function() {
-					for(var i = 200; i <= 800; i += 100) {
-						this.ctx.beginPath();
-						this.ctx.moveTo(i, 105);
-						this.ctx.lineTo(i, 1000);
-						this.ctx.stroke();
-					}
-					//清除指定的矩形区域
-					//this.ctx.clearRect(5, 402,795, 95);
-					this.ctx.clearRect(102.5, 502, 795, 95);
-					//斜线
-					this.LineDrawing(400, 105, 600, 300);
-					this.LineDrawing(400, 805, 600, 1000);
-					//反斜线
-					this.LineDrawing(600, 105, 400, 300);
-					this.LineDrawing(600, 805, 400, 1000);
-				},
-				//坐标的中心点
-				center: function(x, y) {
-					this.ctx.lineWidth = 5;
-					//中心点一（100,200）
-					//左上
-					this.LineDrawing(x - 10, y - 30, x - 10, y - 10);
-					this.LineDrawing(x - 10, y - 10, x - 30, y - 10);
-					//右上
-					this.LineDrawing(x + 10, y - 30, x + 10, y - 10);
-					this.LineDrawing(x + 10, y - 10, x + 30, y - 10);
-					//左下
-					this.LineDrawing(x - 10, y + 30, x - 10, y + 10);
-					this.LineDrawing(x - 10, y + 10, x - 30, y + 10);
-					//右下
-					this.LineDrawing(x + 10, y + 30, x + 10, y + 10);
-					this.LineDrawing(x + 10, y + 10, x + 30, y + 10);
-				},
-				drawFont: function() {
-					this.ctx.lineWidth = 1;
-					//绘制文字
-					this.ctx.font = "60px microsoft yahei";
-					this.ctx.save(); //保存点
-					//将坐标中心作为起启点
-					this.ctx.translate(canvas1.width / 2, canvas1.height / 2);
-					var radian = Math.PI / 2; // 弧度制 Math.PI=π
-					this.ctx.rotate(radian); // 旋转画布绘制刻度
-					//填充
-					this.ctx.fillText("楚", -30, -270);
-					this.ctx.fillText("河", -30, -150);
-					this.ctx.restore(); //恢复到保存点
-					this.ctx.save();
-					//将坐标中心作为起点
-					this.ctx.translate(canvas1.width / 2, canvas1.height / 2);
-					var radian = Math.PI / -2;
-					this.ctx.rotate(radian);
-					this.ctx.fillText("汉", -30, -270);
-					this.ctx.fillText("界", -30, -150);
-					this.ctx.restore();
-				}
-			};
-			object.init();
-		</script>
-	</body>
+        #gameHints{
+            text-align:center;
+            font-size: 30px;
+            font-weight: bold;
+            position: fixed;
+            top: 45%;
+            left: 45%;
+            background-color : black;
+            text-shadow : rgba(255,255,255,0.5) 0 5px 6px, rgba(255,255,255,0.2) 1px 3px 3px;
+            -webkit-background-clip : text;
+            color:hsl(10, 100%, 40%);
+        }
+        #msgText, #confirmSend, #allMsg{
+            border:1px #52ff49 solid;
+            color: black;
+            background:rgba(0, 0, 0, 0);
+            font-weight: bold;
+            font-family: Cambria;
+        }
+    </style>
+</head>
 
+<body>
+    <canvas id="canvas"  width="540" height="600"></canvas>
+    <div id="chat" >
+        <textarea id="allMsg" style="width: 100%; height: 90%;resize: none;" disabled>
+
+        </textarea>
+        <div class="col-lg-6" style="height: 10%;width: 100%;">
+            <div class="input-group">
+                <input id="msgText" type="text" class="form-control" style="border:1px #52ff49 solid;background:rgba(0, 0, 0, 0);">
+                <span class="input-group-btn">
+						<button class="btn btn-default" type="button" id="confirmSend">
+                            发送
+						</button>
+					</span>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" id="changeUser">切换角色</button>
+    <button class="btn btn-primary" id="prepare">准备</button>
+    <div style="display: none">
+        <img th:src="@{/img/chess/black_army.gif}" id="black_army">
+        <img th:src="@{/img/chess/red_army.gif}" id="red_army">
+        <img th:src="@{/img/chess/red_cannon.gif}" id="red_cannon">
+        <img th:src="@{/img/chess/black_cannon.gif}" id="black_cannon">
+        <img th:src="@{/img/chess/black_car.gif}" id="black_car">
+        <img th:src="@{/img/chess/red_car.gif}" id="red_car">
+        <img th:src="@{/img/chess/red_elephant.gif}" id="red_elephant">
+        <img th:src="@{/img/chess/black_elephant.gif}" id="black_elephant">
+        <img th:src="@{/img/chess/black_general.gif}" id="black_general">
+        <img th:src="@{/img/chess/red_general.gif}" id="red_general">
+        <img th:src="@{/img/chess/black_horse.gif}" id="black_horse">
+        <img th:src="@{/img/chess/red_horse.gif}" id="red_horse">
+        <img th:src="@{/img/chess/red_soldier.gif}" id="red_soldier">
+        <img th:src="@{/img/chess/black_soldier.gif}" id="black_soldier">
+    </div>
+    <h2 id="gameHints" style="display: none;"></h2>
+</body>
+
+<script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/jquery.beattext.js}" type="text/javascript"></script>
+<script th:src="@{/js/easying.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
+<!--<script th:src="@{/js/socket.js}?time=New Date()" type="text/javascript"></script>-->
+<!--<script th:src="@{/js/chessGame.js}" type="text/javascript"></script>-->
+<script src="/js/socket.js?version=200223143233421" type="text/javascript"></script>
+<script src="/js/chessGame.js?version=2033333343343232232311" type="text/javascript"></script>
+
+
+<script>
+    window.onload = function () {
+        var windowWidth = window.screen.width * window.devicePixelRatio;
+        var windowHeight = window.screen.height * window.devicePixelRatio;
+        var chessGame = new ChessGame();
+        $('#canvas').css({"width" : windowWidth * 0.4, "height" : windowHeight * 0.7});
+        $('#chat').css({"width" : windowWidth * 0.2, "height" : windowHeight * 0.6});
+        chessGame.start();
+        if (!socket.connected()) {
+            socket.connect("ws://10.1.87.136:8080/websocket");
+        }
+        $('#prepare').on("click", function () {
+
+            if(!socket.connected()) {
+                setText("服务器连接中。。。", 2);
+                return ;
+            }
+            //排队中 动画
+            setText("正在匹配中...", 1);
+            //请求变为准备状态
+            socket.send(new socketMessage("prepare", null));
+        });
+
+        $('#confirmSend').on('click', function () {
+            var msg = $('#msgText').val();
+            if (msg === undefined || msg === null || msg === "") {
+                return ;
+            }
+            socket.send(new socketMessage("chat", msg));
+            toChat(msg, myUser);
+        });
+
+        function toChat(msg, user) {
+            $('#allMsg').text($('#allMsg').text()+ "\n" + "[" + user  + "]:\t"  + msg + "\n" + getLocalTime(new Date().getTime()));
+        }
+        /**
+         * 收到消息的回调方法
+         * @param event
+         */
+        webSocket.onmessage = function (event) {
+            var data = JSON.parse(event.data);
+            console.log(data)
+            if (data.type === "start") {
+                if (data.content === "you first") {
+                    turnMe = true;
+                } else {
+                    turnMe = false;
+                }
+                startGame();
+            } else if (data.type === "move") {
+                var content = data.content.split(";");
+                var firstPoint = content[0].split(",");
+                var secondPoint = content[1].split(",");
+                var pointX = new Coordinate(parseInt(firstPoint[0]), parseInt(firstPoint[1]));
+                var pointY = new Coordinate(parseInt(secondPoint[0]), parseInt(secondPoint[1]));
+                chessGame.chessMove(pointX, pointY, otherUser);
+            } else if (data.type === "leave") {
+                setText("由于对方离开，恭喜你 ，你赢了", 2);
+
+                //TODO  显示排行榜
+            } else if (data.type === "chat") {
+                toChat(data.content, otherUser);
+            }
+        };
+
+        /**
+         * 开始游戏
+         */
+        function startGame() {
+            if (turnMe) {
+                setText("我方先手", 2);
+            } else {
+                setText("对方先手", 2);
+            }
+            chessGame.start();
+        }
+        $('#changeUser').on('click', function () {
+            var tmp = myUser;
+            myUser = otherUser;
+            otherUser = tmp;
+        });
+    };
+
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+    }
+</script>
 </html>

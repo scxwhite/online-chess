@@ -9,5 +9,5 @@ import com.xyny.entity.User;
  */
 public interface UserService {
 
-    Integer loginCheck(User user);
+    boolean loginCheck(User user);
 }
