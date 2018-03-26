@@ -6,8 +6,8 @@
     <title>简单登录</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
-    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <style>
         html {
             margin:0 auto;
@@ -16,41 +16,43 @@
             width: 100%;
         }
 
-        body {
-            background: url("../img/background/bg1.jpg") center no-repeat fixed;
-            background-size: 100% 100%;
-            height: 100%;
-            width: 100%;
-        }
         #visitor {
-            margin-top: 50%;
             width: 350px;
             height: 150px;
             background: url("../img/login/button2.png") center no-repeat;
             background-size: 100% 100%;
+            position: fixed;
         }
+
         #account {
-            margin-top: 50%;
-            margin-left: 30%;
             width: 350px;
             height: 150px;
             background: url("../img/login/button3.png") center no-repeat;
             background-size: 100% 100%;
+            position: fixed;
         }
     </style>
 </head>
-<body class="container">
-    <div class="row" id="gameTitle" style="position: fixed">
+<body class="container" >
+    <div class="row" id="gameTitle" style="position: fixed;display: none">
         <img th:src="@{/img/login/gameTitle.png}">
     </div>
-
     <div class="row" id="loginArea">
-        <button class="btn col-lg-6"  id="visitor"></button>
-        <button class="btn col-lg-6"  id="account"></button>
+        <button class="btn col-lg-6"  id="visitor" style="display: none;"></button>
+        <button class="btn col-lg-6"  id="account" style="display: none;"></button>
     </div>
-
+    <div id="loginDiv" style="display: none;">
+        <h1 style="font-family: serif">游戏登录界面</h1>
+        <div class="signin">
+            <form action="#">
+                <input type="text" class="user" name="username" id="username" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '用户名';}" />
+                <input type="password" class="pass" name="password" id="password" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}" />
+                <input type="submit" value="登录" id="login"/>
+                <input type="submit" value="注册" />
+            </form>
+        </div>
+    </div>
 </body>
-
 <script src="/js/jquery-3.1.1.min.js" ></script>
 <script src="/js/bootstrap.js" ></script>
 <script>
@@ -62,34 +64,13 @@
         });
         //帐号登录
         $('#account').on('click', function () {
-
+            $('#loginArea').toggle(1500);
+            $('#gameTitle').toggle(1500);
+            $('#loginDiv').toggle(1500);
         });
         $('#login').on('click', function () {
-            var username = $('#username').val();
-            var password = $('#password').val();
-
-
-            if (checkNull(username, "用户名不能为空") || checkNull(password, "密码不能为空")) {
-                return ;
-            }
-            var data =  "username=" + username + "&password=" + password;
-            $.ajax({
-                url: "/user/login",
-                type: "post",
-                data: data,
-                success: function (data) {
-                    if (data.success == false) {
-                        checkNull(null, data.message);
-                        return ;
-                    }
-                    checkNull(null, "登录成功");
-                    localStorage.setItem("username", data.result);
-
-                    console.log(localStorage.getItem("username"))
-                    location.href = "/homepage/success";
-                }
-            })
-        })
+            login(1);
+        });
 
         $('#register').on('click', function () {
             var username = $('#username').val();
@@ -114,7 +95,11 @@
     function initUI() {
         var windowWidth = window.screen.width * window.devicePixelRatio;
         var windowHeight = window.screen.height * window.devicePixelRatio;
-        $('#gameTitle').css({"left": windowWidth / 2 - 390,"top": windowHeight / 2 - windowHeight * 0.3});
+        $('#gameTitle').css({"left": windowWidth / 2 - 390,"top": windowHeight / 2 - windowHeight * 0.3}).toggle(1500);
+
+        $('#visitor').css({"left": windowWidth / 2 - 175 - 300,"top" : windowHeight / 2 + 150}).toggle(1500);
+        $('#account').css({"left": windowWidth / 2 - 175 + 300,"top" : windowHeight / 2 + 150}).toggle(1500);
+
     }
     function login(type) {
         if (type === 0) {
@@ -131,11 +116,30 @@
                 }
             })
         }
+        if (type === 1) {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            if (checkNull(username, "用户名不能为空") || checkNull(password, "密码不能为空")) {
+                return ;
+            }
+            var data =  "username=" + username + "&password=" + password;
+            $.ajax({
+                url: "/login/check",
+                type: "post",
+                data: data,
+                success: function (data) {
+                    if (data.success === true) {
+                        location.href =  "/index/chess";
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            })
+        }
     }
     function checkNull(val, msg) {
         if (val == null || val == undefined || val == "") {
-            $('#confirmModalBody').text(msg + "^_^");
-            $('#confirmModal').modal('show');
+            alert(msg + "^_^");
             return true;
         }
         return false;
