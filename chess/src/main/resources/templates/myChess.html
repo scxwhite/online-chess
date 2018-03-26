@@ -21,7 +21,7 @@
 
         canvas{
             position: fixed;
-            left: 20%;
+            left: 30%;
             top: 10%;
 
         }
@@ -114,31 +114,31 @@
 <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
 <!--<script th:src="@{/js/socket.js}?time=New Date()" type="text/javascript"></script>-->
 <!--<script th:src="@{/js/chessGame.js}" type="text/javascript"></script>-->
-<script src="/js/socket.js?version=2002231423421" type="text/javascript"></script>
-<script src="/js/chessGame.js?version=20333432232311" type="text/javascript"></script>
+<script src="/js/socket.js?version=200223143233421" type="text/javascript"></script>
+<script src="/js/chessGame.js?version=2033333343343232232311" type="text/javascript"></script>
 
 
 <script>
     window.onload = function () {
-        var windowWidth = window.screen.width;
-        var windowHeight = window.screen.height;
+        var windowWidth = window.screen.width * window.devicePixelRatio;
+        var windowHeight = window.screen.height * window.devicePixelRatio;
         var chessGame = new ChessGame();
-        var checkConnect, canStart, gameStart = false;
-        //TODO  测试定位
-
-        $('#canvas').css({"width" : windowWidth * 0.6, "height" : windowHeight * 0.8});
+        $('#canvas').css({"width" : windowWidth * 0.4, "height" : windowHeight * 0.7});
         $('#chat').css({"width" : windowWidth * 0.2, "height" : windowHeight * 0.6});
         chessGame.start();
         if (!socket.connected()) {
             socket.connect("ws://10.1.87.136:8080/websocket");
         }
         $('#prepare').on("click", function () {
+
+            if(!socket.connected()) {
+                setText("服务器连接中。。。", 2);
+                return ;
+            }
             //排队中 动画
             setText("正在匹配中...", 1);
             //请求变为准备状态
             socket.send(new socketMessage("prepare", null));
-            //定时检测连接状态
-            checkConnect = setInterval(checkConnect, 500);
         });
 
         $('#confirmSend').on('click', function () {
@@ -151,7 +151,7 @@
         });
 
         function toChat(msg, user) {
-            $('#allMsg').text($('#allMsg').text()+ "\n" + "[" + user  + "]:"  + msg + "\t\t\t\t" + getLocalTime(new Date().getTime()));
+            $('#allMsg').text($('#allMsg').text()+ "\n" + "[" + user  + "]:\t"  + msg + "\n" + getLocalTime(new Date().getTime()));
         }
         /**
          * 收到消息的回调方法
@@ -166,7 +166,7 @@
                 } else {
                     turnMe = false;
                 }
-                gameStart = true;
+                startGame();
             } else if (data.type === "move") {
                 var content = data.content.split(";");
                 var firstPoint = content[0].split(",");
@@ -183,32 +183,16 @@
             }
         };
 
-
-        function checkConnect() {
-            var status = socket.connected();
-            if (status) {
-                clearInterval(checkConnect);
-                //定时检测匹配状态
-                canStart = setInterval(canStart, 500);
-            }
-            return status;
-        }
-
         /**
-         * 判断游戏能否开始
+         * 开始游戏
          */
-        function canStart() {
-            console.log("检测匹配状态");
-            if (gameStart) {
-                closeText();
-                if (turnMe) {
-                    setText("我方先手", 2);
-                } else {
-                    setText("对方先手", 2);
-                }
-                clearInterval(canStart);
-                chessGame.start();
+        function startGame() {
+            if (turnMe) {
+                setText("我方先手", 2);
+            } else {
+                setText("对方先手", 2);
             }
+            chessGame.start();
         }
         $('#changeUser').on('click', function () {
             var tmp = myUser;

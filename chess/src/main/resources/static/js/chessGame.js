@@ -17,8 +17,13 @@ function Coordinate(x, y) {
  * @param type  类型   1：不关闭文字  2：3s后关闭文字
  */
 function setText(msg, type) {
-    $('#gameHints').text(msg).css({"display":""}).beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:100,downTime:100});
+    closeText();
+    if (type === 1) {
+        $('#gameHints').text(msg).css({"display":""}).beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:100,downTime:100});;
+    }
+
     if (type === 2) {
+        $('#gameHints').text(msg).css({"display":""});
         setTimeout(closeText, 3000);
     }
 }

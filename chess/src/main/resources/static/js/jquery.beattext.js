@@ -15,6 +15,7 @@
         };
         var options = $.extend(defaults, options);
         return this.each(function() {
+        	debugger
             var obj = $(this);
             if (obj.text() !== obj.html()) {
                 return
