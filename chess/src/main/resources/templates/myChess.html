@@ -99,7 +99,8 @@
         var checkConnect, canStart, gameStart = false;
 
         if (!socket.connected()) {
-            socket.connect("ws://10.1.87.136:8080/websocket");
+            //socket.connect("ws://118.89.150.75:80/websocket");
+            socket.connect("ws://127.0.0.1:80/websocket");
         }
 
         $('#prepare').on("click", function () {
