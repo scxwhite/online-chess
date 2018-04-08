@@ -17,7 +17,7 @@
         }
 
         #visitor {
-            width: 350px;
+            width: 250px;
             height: 150px;
             background: url("../img/login/button2.png") center no-repeat;
             background-size: 100% 100%;
@@ -25,7 +25,7 @@
         }
 
         #account {
-            width: 350px;
+            width: 250px;
             height: 150px;
             background: url("../img/login/button3.png") center no-repeat;
             background-size: 100% 100%;
@@ -38,8 +38,8 @@
         <img th:src="@{/img/login/gameTitle.png}">
     </div>
     <div class="row" id="loginArea">
-        <button class="btn col-lg-6"  id="visitor" style="display: none;"></button>
-        <button class="btn col-lg-6"  id="account" style="display: none;"></button>
+        <button class="btn col-lg-3"  id="visitor" style="display: none;"></button>
+        <button class="btn col-lg-3"  id="account" style="display: none;"></button>
     </div>
     <div id="loginDiv" style="display: none;">
         <h1 style="font-family: serif">游戏登录界面</h1>
@@ -56,6 +56,7 @@
 <script src="/js/jquery-3.1.1.min.js" ></script>
 <script src="/js/bootstrap.js" ></script>
 <script>
+    var isLogin = false;
     $(function () {
         initUI();
         //游客登录
@@ -64,9 +65,12 @@
         });
         //帐号登录
         $('#account').on('click', function () {
-            $('#loginArea').toggle(1500);
-            $('#gameTitle').toggle(1500);
-            $('#loginDiv').toggle(1500);
+            if (!isLogin) {
+                isLogin = true;
+                $('#loginArea').toggle(1500);
+                $('#gameTitle').toggle(1500);
+                $('#loginDiv').toggle(1500);
+            }
         });
         $('#login').on('click', function () {
             login(1);
@@ -93,12 +97,13 @@
         })
     });
     function initUI() {
-        var windowWidth = window.screen.width * window.devicePixelRatio;
-        var windowHeight = window.screen.height * window.devicePixelRatio;
+        var windowWidth = window.screen.width;
+        var windowHeight = window.screen.height;
+        console.log(windowHeight + " " + windowWidth)
         $('#gameTitle').css({"left": windowWidth / 2 - 390,"top": windowHeight / 2 - windowHeight * 0.3}).toggle(1500);
 
-        $('#visitor').css({"left": windowWidth / 2 - 175 - 300,"top" : windowHeight / 2 + 150}).toggle(1500);
-        $('#account').css({"left": windowWidth / 2 - 175 + 300,"top" : windowHeight / 2 + 150}).toggle(1500);
+        $('#visitor').css({"left": windowWidth / 2 - 175 - 300,"top" : windowHeight / 2 + 100}).toggle(1500);
+        $('#account').css({"left": windowWidth / 2 - 175 + 300,"top" : windowHeight / 2 + 100}).toggle(1500);
 
     }
     function login(type) {
