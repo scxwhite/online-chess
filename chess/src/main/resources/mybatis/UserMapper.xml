@@ -5,21 +5,23 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="base_column_list">
-        id,username,password
+        id,username,password,image_url
     </sql>
     <sql id="base_table" >
         user
     </sql>
 
     <select id="selectByUser" resultType="java.lang.Integer">
-        select count(1) FROM
+        select id FROM
         <include refid="base_table"/>
         WHERE
         username = #{username,jdbcType=VARCHAR}
         AND
         password = #{password,jdbcType=VARCHAR}
+        limit 1
     </select>
 
     <insert id="insert" parameterType="com.xynu.entity.User" >
@@ -28,4 +30,12 @@
         (username,password)
         VALUES (#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
     </insert>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list"/>
+        from
+        <include refid="base_table"/>
+        where id= #{id, jdbcType=INTEGER}
+    </select>
 </mapper>

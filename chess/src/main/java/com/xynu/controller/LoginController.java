@@ -39,14 +39,14 @@ public class LoginController {
     public JsonResponse check(@RequestParam("username") String username,
                               @RequestParam(name = "password", required = false) String password,
                               HttpServletResponse response) throws IOException {
-        boolean isAccess = false;
+        Integer id;
         if (StringUtils.equals(username, "_visitor")) {
-           isAccess = true;
+            id = -1;
         } else {
-            isAccess = userService.loginCheck(User.builder().username(username).password(MD5Util.getMD5(password)).build());
+            id = userService.loginCheck(User.builder().username(username).password(MD5Util.getMD5(password)).build());
         }
-        if (isAccess) {
-            Cookie cookie = new Cookie("username", username);
+        if (id != null) {
+            Cookie cookie = new Cookie("username", String.valueOf(id));
             cookie.setPath("/");
             cookie.setMaxAge(3 * 60 * 60);
             response.addCookie(cookie);

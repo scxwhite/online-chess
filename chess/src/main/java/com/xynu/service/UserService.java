@@ -9,5 +9,7 @@ import com.xynu.entity.User;
  */
 public interface UserService {
 
-    boolean loginCheck(User user);
+    Integer loginCheck(User user);
+
+    User findById(Integer id);
 }

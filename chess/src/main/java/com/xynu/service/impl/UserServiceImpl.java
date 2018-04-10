@@ -19,11 +19,13 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public boolean loginCheck(User user) {
-        Integer x = userMapper.selectByUser(user);
-        if (x == null || x == 0) {
-            return false;
-        }
-        return true;
+    public Integer loginCheck(User user) {
+        return userMapper.selectByUser(user);
     }
+
+    @Override
+    public User findById(Integer id) {
+        return userMapper.selectById(id);
+    }
+
 }

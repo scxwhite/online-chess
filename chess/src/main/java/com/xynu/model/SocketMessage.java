@@ -23,4 +23,8 @@ public class SocketMessage {
      *  请求类型
      */
     private String type;
+    /**
+     * 其它信息
+     */
+    private Object extra;
 }

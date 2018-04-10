@@ -17,7 +17,7 @@
         }
 
         #visitor {
-            width: 250px;
+            width: 300px;
             height: 150px;
             background: url("../img/login/button2.png") center no-repeat;
             background-size: 100% 100%;
@@ -25,7 +25,7 @@
         }
 
         #account {
-            width: 250px;
+            width: 300px;
             height: 150px;
             background: url("../img/login/button3.png") center no-repeat;
             background-size: 100% 100%;
@@ -102,8 +102,8 @@
         console.log(windowHeight + " " + windowWidth)
         $('#gameTitle').css({"left": windowWidth / 2 - 390,"top": windowHeight / 2 - windowHeight * 0.3}).toggle(1500);
 
-        $('#visitor').css({"left": windowWidth / 2 - 175 - 300,"top" : windowHeight / 2 + 100}).toggle(1500);
-        $('#account').css({"left": windowWidth / 2 - 175 + 300,"top" : windowHeight / 2 + 100}).toggle(1500);
+        $('#visitor').css({"left": windowWidth / 2 - 175 - 300,"bottom" : windowHeight * 0.1}).toggle(1500);
+        $('#account').css({"left": windowWidth / 2 - 175 + 300,"bottom" : windowHeight * 0.1}).toggle(1500);
 
     }
     function login(type) {

@@ -99,19 +99,20 @@
 </div>
 <div id="userInfo">
 
-    <div class="col-lg-" style="height: 50%;width: 100%;border: 1px red solid;">
-        <div class="thumbnail" style="height: 100%">
-            <img src="http://www.runoob.com/wp-content/uploads/2014/06/kittens.jpg"
-                 alt="通用的占位符缩略图" style="height: 80%">
-            <div class="caption" style="height: 20%">
-                <h3>缩略图标签</h3>
-                <p>一些示例文本。一些示例文本。</p>
+    <div  style="height: 50%;width: 100%;border: 1px red solid;" id="other">
+            <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1031893560,2135917576&fm=27&gp=0.jpg"
+                 alt="通用的占位符缩略图" style="height: 70%;width: 100%;">
+            <div  style="height: 30%;background-color: #ffeb61" >
+                <p >昵称：张飞</p>
             </div>
-        </div>
     </div>
 
-    <div class="col-lg-6" style="height: 50%;width: 100%;border: 1px red solid;">
-
+    <div  style="height: 50%;width: 100%;border: 1px red solid;" id="myself">
+        <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1031893560,2135917576&fm=27&gp=0.jpg"
+             alt="通用的占位符缩略图" style="height: 70%;width: 100%;">
+        <div  style="height: 30%;background-color: #ffeb61" >
+            <p>昵称：关于</p>
+        </div>
     </div>
 </div>
 
@@ -141,6 +142,7 @@
 <script th:src="@{/js/jquery.beattext.js}" type="text/javascript"></script>
 <script th:src="@{/js/easying.js}" type="text/javascript"></script>
 <script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
+<script th:src="@{/js/util.js}" type="text/javascript"></script>
 <!--<script th:src="@{/js/socket.js}?time=New Date()" type="text/javascript"></script>-->
 <!--<script th:src="@{/js/chessGame.js}" type="text/javascript"></script>-->
 <script src="/js/socket.js?version=200223143233421" type="text/javascript"></script>
@@ -149,15 +151,15 @@
 
 <script>
     window.onload = function () {
-        var windowWidth = window.screen.width;
-        var windowHeight = window.screen.height;
+        var windowWidth = window.screen.availWidth;
+        var windowHeight = window.screen.availHeight;
         var chessGame = new ChessGame();
         $('#canvas').css({"width": windowWidth * 0.4, "height": windowHeight * 0.7});
         $('#chat').css({"width": windowWidth * 0.2, "height": windowHeight * 0.6});
         $('#userInfo').css({"width": windowWidth * 0.2, "height": windowHeight * 0.7});
         chessGame.start();
         if (!socket.connected()) {
-            socket.connect("ws://localhost:8080/websocket");
+            socket.connect("ws://localhost:8080/websocket?id=" + getCookie("username"));
         }
         $('#prepare').on("click", function () {
 
@@ -197,6 +199,7 @@
                 } else {
                     turnMe = false;
                 }
+                setHeadImage(data.extra)
                 startGame();
             } else if (data.type === "move") {
                 var content = data.content.split(";");
@@ -207,7 +210,6 @@
                 chessGame.chessMove(pointX, pointY, otherUser);
             } else if (data.type === "leave") {
                 setText("由于对方离开，恭喜你 ，你赢了", 2);
-
                 //TODO  显示排行榜
             } else if (data.type === "chat") {
                 toChat(data.content, otherUser);
@@ -232,7 +234,34 @@
             otherUser = tmp;
         });
     };
-
+    function setHeadImage(id) {
+        $.ajax({
+            url: "/user/headImage",
+            data: {
+                id: id
+            },
+            type: "get",
+            success: function (data) {
+                if (data.success == true) {
+                    $('#other img:first').attr("src", data.result.imageUrl);
+                    $('#other p:first').attr("昵称：", data.result.username);
+                }
+            }
+        });
+        $.ajax({
+            url: "/user/headImage",
+            data: {
+                id: getCookie("username")
+            },
+            type: "get",
+            success: function (data) {
+                if (data.success == true) {
+                    $('#myself img:first').attr("src", data.result.imageUrl);
+                    $('#myself p:first').text("昵称：" + data.result.username);
+                }
+            }
+        });
+    }
     function getLocalTime(nS) {
         return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
     }
