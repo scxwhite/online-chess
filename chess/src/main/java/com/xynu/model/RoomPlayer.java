@@ -1,9 +1,9 @@
 package com.xynu.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.websocket.Session;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *  开始比赛的两个session对象
@@ -11,16 +11,11 @@ import javax.websocket.Session;
  * @date 2018/3/20
  */
 @Data
-@Builder
-public class ChessPlayer {
+public class RoomPlayer {
     private Session first;
     private Session second;
+    private AtomicInteger peopleNum;
+    private String roomName;
+    private Integer roomId;
 
-    /**
-     *  一个用户发送给另外一个用户
-     * @param people
-     */
-    public void sendToAnother(Session people) {
-
-    }
 }

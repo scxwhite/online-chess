@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  *
@@ -46,10 +48,14 @@ public class LoginController {
             id = userService.loginCheck(User.builder().username(username).password(MD5Util.getMD5(password)).build());
         }
         if (id != null) {
-            Cookie cookie = new Cookie("username", String.valueOf(id));
-            cookie.setPath("/");
-            cookie.setMaxAge(3 * 60 * 60);
-            response.addCookie(cookie);
+            Cookie usernameCookie = new Cookie("username", String.valueOf(id));
+            Cookie addressCookie = new Cookie("address", InetAddress.getLocalHost().getHostAddress());
+            usernameCookie.setPath("/");
+            addressCookie.setPath("/");
+            usernameCookie.setMaxAge(3 * 60 * 60);
+            addressCookie.setMaxAge(3 * 60 * 60);
+            response.addCookie(usernameCookie);
+            response.addCookie(addressCookie);
             return new JsonResponse(true, "登录成功");
         }
         return new JsonResponse(false, "用户名或密码错误");

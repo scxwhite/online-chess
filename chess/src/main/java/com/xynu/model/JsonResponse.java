@@ -15,7 +15,7 @@ public class JsonResponse<T> implements Serializable{
      * 标志   true：查询成功
      *          false: 查询失败
      */
-    private boolean isSuccess;
+    private boolean success;
     /**
      * 返回的信息
      */
@@ -26,12 +26,12 @@ public class JsonResponse<T> implements Serializable{
     private T       result;
 
     public JsonResponse(boolean isSuccess, String message) {
-        this.isSuccess = isSuccess;
+        this.success = isSuccess;
         this.message = message;
     }
 
     public JsonResponse(boolean isSuccess, String message, T result) {
-        this.isSuccess = isSuccess;
+        this.success = isSuccess;
         this.message = message;
         this.result = result;
     }

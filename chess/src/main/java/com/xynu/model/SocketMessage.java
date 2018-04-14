@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class SocketMessage {
     /**
      * 消息内容
@@ -27,4 +27,13 @@ public class SocketMessage {
      * 其它信息
      */
     private Object extra;
+
+    public SocketMessage(String type) {
+        this.type = type;
+    }
+
+    public SocketMessage(String type, String content) {
+        this.content = content;
+        this.type = type;
+    }
 }

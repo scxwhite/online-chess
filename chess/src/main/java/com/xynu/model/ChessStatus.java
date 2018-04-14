@@ -10,6 +10,11 @@ public enum  ChessStatus {
     MOVE("move"),
     LEAVE("leave"),
     CHAT("chat"),
+    CREATE_ROOM("createRoom"),
+    ENTER_ROOM("enterRoom"),
+    ROOM_START("roomStart"),
+    LEAVE_ROOM("leaveRoom"),
+    ERROE("error"),
     START("start");
 
     private String type;
