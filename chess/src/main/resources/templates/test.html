@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:pd="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>象棋盘</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body class="container">
+<div class="radio">
+    <label>
+        <input type="radio" class="radio-check" name="version"  value="1"> 国行
+    </label>
+    <label>
+        <input type="radio" class="radio-check" name="version"  value="2"> 港版
+    </label>
+</div>
+<div class="radio">
+    <label>
+        <input type="radio" class="radio-check" name="color"  value="3"> 红色
+    </label>
+    <label>
+        <input type="radio" class="radio-check" name="color"  value="4"> 白色
+    </label>
+    <label>
+        <input type="radio" class="radio-check" name="color"  value="5"> 蓝色
+    </label>
+</div>
+
+<div class="radio">
+    <label>
+        <input type="radio" class="radio-check" name="memo"  value="1"> 32g
+    </label>
+    <label>
+        <input type="radio"  class="radio-check" name="memo"  value="2"> 64g
+    </label>
+</div>
+</body>
+
+<script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
+<script th:src="@{/js/util.js}" type="text/javascript"></script>
+<script>
+    var isCheck = [];
+    $(function () {
+       $('.radio-check').on('change', function () {
+           var val = $(this).val();
+
+           if (isCheck.hasOwnProperty(val) && isCheck[val] == true) {
+               $(this).prop('checked', false)
+               isCheck[val] = !isCheck[val];
+               return ;
+           } else {
+               isCheck[val] = true;
+           }
+
+           console.log(val + " " + isCheck[val]);
+       });
+
+    });
+</script>
+
+</html>

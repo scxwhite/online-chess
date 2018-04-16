@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:pd="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="chess">
+        <canvas id="canvas" width="540" height="600"></canvas>
+        <div id="chat">
+        <textarea id="allMsg" style="width: 100%; height: 90%;resize: none;color: whitesmoke" disabled>
+
+        </textarea>
+            <div class="col-lg-6" style="height: 10%;width: 100%;">
+                <div class="input-group">
+                    <input id="msgText" type="text" class="form-control"
+                           style="border:1px #52ff49 solid;background:rgba(0, 0, 0, 0);color: whitesmoke">
+                    <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="confirmSend" style="color: whitesmoke">
+                发送
+                </button>
+            </span>
+                </div>
+            </div>
+        </div>
+        <div id="userInfo">
+
+            <div  style="height: 50%;width: 100%;border: 1px #a9ff9f solid;" id="other">
+                <img th:src="@{/images/girl.png}"
+                     alt="无对手" style="height: 70%;width: 100%;" class="image img-circle">
+                <div  style="height: 30%;border: 1px #a9ff9f solid;color: #ffffff;" >
+                    <p >昵称：无</p>
+                </div>
+            </div>
+            <br>
+            <div style="height: 50%;width: 100%;border: 1px #a9ff9f solid;" id="myself">
+                <img th:src="@{/images/boy.png}"
+                     alt="" style="height: 70%;width: 100%;" class="image img-circle">
+                <div  style="height: 30%;border: 1px #a9ff9f solid;color: #ffffff;" >
+                    <p>昵称：无</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="display: none">
+            <img th:src="@{/img/chess/black_army.gif}" id="black_army">
+            <img th:src="@{/img/chess/red_army.gif}" id="red_army">
+            <img th:src="@{/img/chess/red_cannon.gif}" id="red_cannon">
+            <img th:src="@{/img/chess/black_cannon.gif}" id="black_cannon">
+            <img th:src="@{/img/chess/black_car.gif}" id="black_car">
+            <img th:src="@{/img/chess/red_car.gif}" id="red_car">
+            <img th:src="@{/img/chess/red_elephant.gif}" id="red_elephant">
+            <img th:src="@{/img/chess/black_elephant.gif}" id="black_elephant">
+            <img th:src="@{/img/chess/black_general.gif}" id="black_general">
+            <img th:src="@{/img/chess/red_general.gif}" id="red_general">
+            <img th:src="@{/img/chess/black_horse.gif}" id="black_horse">
+            <img th:src="@{/img/chess/red_horse.gif}" id="red_horse">
+            <img th:src="@{/img/chess/red_soldier.gif}" id="red_soldier">
+            <img th:src="@{/img/chess/black_soldier.gif}" id="black_soldier">
+        </div>
+        <h2 id="gameHints" style="display: none;"></h2>
+        <button class="btn btn-primary center-block" id="prepare" style="position: fixed; bottom: 5%; left: 48%">准备</button>
+    </div>
+</body>
+</html>

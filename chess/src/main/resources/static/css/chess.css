@@ -1,0 +1,65 @@
+html {
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+canvas {
+    position: fixed;
+    left: 30%;
+    top: 10%;
+
+}
+#chat {
+    position: fixed;
+    right: 5%;
+    top: 20%;
+}
+
+#userInfo {
+    position: fixed;
+    left: 5%;
+    top: 10%;
+}
+
+.beat-char {
+    line-height: 3.4em;
+    position: relative;
+    display: inline-block;
+    background: transparent;
+
+}
+
+.rotate {
+    transform: rotate(360deg);
+    -ms-transform: rotate(360deg); /* IE 9 */
+    -moz-transform: rotate(360deg); /* Firefox */
+    -webkit-transform: rotate(360deg); /* Safari 和 Chrome */
+    -o-transform: rotate(360deg);
+    -webkit-transition-duration: 0.7s;
+
+}
+
+#gameHints {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    position: fixed;
+    top: 45%;
+    left: 45%;
+    background-color: black;
+    text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px, rgba(255, 255, 255, 0.2) 1px 3px 3px;
+    -webkit-background-clip: text;
+    color: hsl(10, 100%, 40%);
+}
+
+#msgText, #confirmSend, #allMsg {
+    border: 1px #52ff49 solid;
+    color: black;
+    background: rgba(0, 0, 0, 0);
+    font-weight: bold;
+    font-family: Cambria;
+}

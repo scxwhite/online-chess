@@ -70,69 +70,77 @@ public class MyWebSocket {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        if (StringUtils.equals(socketMessage.getType(), ChessStatus.PREPARE.getType())) {
-            //匹配模式  准备状态 想找对手
-            if (chessQueue.size() == 0) {
-                chessQueue.add(session);
-                log.info("进入队列等待对手~~");
-            } else if (chessQueue.contains(session)) {
-                log.info("已经在等待中。。。");
-            } else {
-                try {
-                    Session otherSession = chessQueue.take();
-                    gameStart(otherSession, session);
-                } catch (InterruptedException e) {
-                    log.info("对手被抢走");
-                    e.printStackTrace();
+        RoomPlayer player;
+        switch (socketMessage.getType()) {
+            case "prepare":
+                //匹配模式  准备状态 想找对手
+                if (chessQueue.size() == 0) {
+                    chessQueue.add(session);
+                    log.info("进入队列等待对手~~");
+                } else if (chessQueue.contains(session)) {
+                    log.info("已经在等待中。。。");
+                } else {
+                    try {
+                        Session otherSession = chessQueue.take();
+                        gameStart(otherSession, session);
+                    } catch (InterruptedException e) {
+                        log.info("对手被抢走");
+                        e.printStackTrace();
+                    }
                 }
-            }
-        } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.MOVE.getType())) {
-            //移动棋子
-            log.info(socketMessage.getContent());
-            sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
-        } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.CHAT.getType())) {
-            sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
-        } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.CREATE_ROOM.getType())) {
-            //创建房间的请求
-            RoomPlayer player = new RoomPlayer();
-            player.setPeopleNum(new AtomicInteger(1));
-            player.setFirst(session);
-            player.setRoomName(socketMessage.getContent());
-            player.setRoomId(roomId.get());
-            sessionToRoomId.put(session, roomId.get());
-            roomPlayerMap.put(roomId.getAndAdd(1), player);
-            sendMessage(new SocketMessage(ChessStatus.CREATE_ROOM.getType(), ""));
-        } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.ENTER_ROOM.getType())) {
-            //进入房间
-            RoomPlayer player = roomPlayerMap.get(Integer.parseInt(socketMessage.getContent()));
-            if (player.getPeopleNum().compareAndSet(1, 2)) {
-                Session otherSession = null;
-                if (player.getFirst() == null) {
-                    player.setFirst(session);
-                    otherSession = player.getSecond();
-                } else if (player.getSecond() == null) {
-                    player.setSecond(session);
-                    otherSession = player.getFirst();
+                break;
+            case "move" :
+                //移动棋子
+                log.info(socketMessage.getContent());
+                sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
+                break;
+            case "chat" :
+                sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
+                break;
+            case "createRoom" :
+                //创建房间的请求
+                player = new RoomPlayer();
+                player.setPeopleNum(new AtomicInteger(1));
+                player.setFirst(session);
+                player.setRoomName(socketMessage.getContent());
+                player.setRoomId(roomId.get());
+                sessionToRoomId.put(session, roomId.get());
+                roomPlayerMap.put(roomId.getAndAdd(1), player);
+                sendMessage(new SocketMessage(ChessStatus.CREATE_ROOM.getType(), ""));
+                break;
+            case "enterRoom" :
+                //进入房间
+                player = roomPlayerMap.get(Integer.parseInt(socketMessage.getContent()));
+                if (player.getPeopleNum().compareAndSet(1, 2)) {
+                    Session otherSession = null;
+                    if (player.getFirst() == null) {
+                        player.setFirst(session);
+                        otherSession = player.getSecond();
+                    } else if (player.getSecond() == null) {
+                        player.setSecond(session);
+                        otherSession = player.getFirst();
+                    }
+                    sessionToRoomId.put(session, player.getRoomId());
+                    sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), sessionMap.get(otherSession).getUserId()));
+                    sessionMap.get(otherSession).sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), userId));
+                } else {
+                    SocketMessage response = new SocketMessage();
+                    response.setType(ChessStatus.ERROE.getType());
+                    response.setContent("该房间已满");
+                    sendMessage(response);
                 }
-                sessionToRoomId.put(session, player.getRoomId());
-                sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), sessionMap.get(otherSession).getUserId()));
-                sessionMap.get(otherSession).sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), userId));
-            } else {
-                SocketMessage response = new SocketMessage();
-                response.setType(ChessStatus.ERROE.getType());
-                response.setContent("该房间已满");
-                sendMessage(response);
-            }
-        } else if (StringUtils.equals(socketMessage.getType(), ChessStatus.ROOM_START.getType())) {
-            //房间开始游戏
-            RoomPlayer player = roomPlayerMap.get(Integer.parseInt(socketMessage.getContent()));
-            if (player != null) {
-                if (player.getFirst() != null && player.getSecond() != null) {
-                    isPlayingMap.put(player.getFirst(), player.getSecond());
-                    gameStart(player.getFirst(), player.getSecond());
+                break;
+            case "roomStart" :
+                //房间开始游戏
+                player = roomPlayerMap.get(Integer.parseInt(socketMessage.getContent()));
+                if (player != null) {
+                    if (player.getFirst() != null && player.getSecond() != null) {
+                        isPlayingMap.put(player.getFirst(), player.getSecond());
+                        gameStart(player.getFirst(), player.getSecond());
+                    }
                 }
-            }
+                break;
+            default: break;
         }
     }
 

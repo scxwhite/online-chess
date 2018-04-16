@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xynu.mapper.ScoresMapper">
+    <resultMap id="BaseResultMap" type="com.xynu.entity.Scores">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="win_times" property="winTimes" jdbcType="INTEGER"/>
+        <result column="fail_times" property="failTimes" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="base_column_list">
+        user_id,win_times,fail_times
+    </sql>
+    <sql id="base_table" >
+        scores
+    </sql>
+
+
+    <insert id="insert" parameterType="com.xynu.entity.User" >
+        INSERT INTO
+        <include refid="base_table"/>
+        (user_id,win_times,fail_times)
+        VALUES (#{userId,jdbcType=INTEGER},#{winTimes,jdbcType=INTEGER},#{failTimes,jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list"/>
+        from
+        <include refid="base_table"/>
+        where user_id= #{id, jdbcType=INTEGER}
+    </select>
+
+    <update id="updateById" parameterType="java.lang.Integer">
+        update
+        <include refid="base_table"/>
+        set
+        win_times = #{winTimes,jdbcType=INTEGER},
+        fail_times = #{failTimes,jdbcType=INTEGER}
+        where
+        user_id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectTopScores" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list"/>
+        from
+        <include refid="base_table"/>
+        order by win_times desc limit 8
+    </select>
+</mapper>
