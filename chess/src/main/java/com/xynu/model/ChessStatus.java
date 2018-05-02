@@ -13,7 +13,9 @@ public enum  ChessStatus {
     CREATE_ROOM("createRoom"),
     ENTER_ROOM("enterRoom"),
     ROOM_START("roomStart"),
+    ROOM_DESTROY("roomDestroy"),
     LEAVE_ROOM("leaveRoom"),
+    SYSTEM("system"),
     ERROE("error"),
     START("start");
 

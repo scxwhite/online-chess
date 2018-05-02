@@ -17,5 +17,6 @@ public class RoomPlayer {
     private AtomicInteger peopleNum;
     private String roomName;
     private Integer roomId;
+    private AtomicInteger prepareNum;
 
 }

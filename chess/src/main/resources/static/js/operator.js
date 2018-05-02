@@ -6,7 +6,6 @@ window.onload = function () {
     $('#canvas').css({"width": windowWidth * 0.4, "height": windowHeight * 0.7});
     $('#chat').css({"width": windowWidth * 0.2, "height": windowHeight * 0.6});
     $('#userInfo').css({"width": windowWidth * 0.2, "height": windowHeight * 0.7});
-    chessGame.start();
     if (!socket.connected()) {
         socket.connect("ws://"+ getCookie("address")+":8080/websocket?id=" + getCookie("username"));
     }
@@ -15,14 +14,14 @@ window.onload = function () {
             setText("服务器连接中。。。", 2);
             return;
         }
-        //排队中 动画
-        setText("正在匹配中...", 1);
         //请求变为准备状态
         socket.send(new socketMessage("prepare", null));
     });
 
     $('#confirmSend').on('click', function () {
-        var msg = $('#msgText').val();
+        var x = $('#msgText');
+        var msg = x.val();
+        x.val('');
         if (msg === undefined || msg === null || msg === "") {
             return;
         }
@@ -59,14 +58,31 @@ window.onload = function () {
         } else if (data.type === "chat") {
             toChat(data.content, otherName.username);
         } else if (data.type === "createRoom") {
+            $('#createRoom').css("display", "none");
             loadGame();
             setHeadImage(null);
         } else if(data.type === "enterRoom") {
+            $('#createRoom').css("display", "none");
             loadGame();
             setHeadImage(data.content);
-        } else if (data.type === "error") {
-            setText(data.content, 2);
+        } else if (data.type === "leaveRoom") {
+            toChat(data.content, "系统提示");
+            $('#other img:first').attr("src", "/images/girl.png");
+            $('#other p:first').text("等待对手。。。");
         }
+        else if (data.type === "error") {
+            setText(data.content, 2);
+            toChat(data.content, "系统提示");
+        } else if (data.type === "prepare") {
+            setText(data.content, 1);
+        } else if (data.type === "system") {
+            toChat(data.content, "系统提示")
+        } else if (data.type === "roomDestroy") {
+            alert(data.content);
+            location.replace(location.href);
+        }
+
+
     };
 
     /**
@@ -130,6 +146,7 @@ function setHeadImage(id) {
         }
     });
 }
+
 function toChat(msg, user) {
     $('#allMsg').text($('#allMsg').text() + "\n" + "[" + user + "]:\t" + msg + "\n" + getLocalTime(new Date().getTime()));
 }

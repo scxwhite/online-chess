@@ -7,7 +7,6 @@ import com.xynu.model.SocketMessage;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -38,7 +37,7 @@ public class MyWebSocket {
     private static BlockingQueue<Session>    chessQueue   = new LinkedBlockingDeque<>();
     public  static Map<Integer, RoomPlayer>  roomPlayerMap = new ConcurrentHashMap<>();
     public  static Map<Session, Integer> sessionToRoomId = new ConcurrentHashMap<>();
-    public  static AtomicInteger  roomId = new AtomicInteger(0);
+    public  static AtomicInteger  roomIdGeneral = new AtomicInteger(0);
     private Session session;
     private String userId;
 
@@ -73,61 +72,93 @@ public class MyWebSocket {
         RoomPlayer player;
         switch (socketMessage.getType()) {
             case "prepare":
-                //匹配模式  准备状态 想找对手
-                if (chessQueue.size() == 0) {
-                    chessQueue.add(session);
-                    log.info("进入队列等待对手~~");
-                } else if (chessQueue.contains(session)) {
-                    log.info("已经在等待中。。。");
+                Integer roomId = sessionToRoomId.get(session);
+                //如果已经在房间准备
+                if (roomId != null) {
+                    player = roomPlayerMap.get(roomId);
+                    if (player.getPeopleNum().get() < 2) {
+                        sendMessage(new SocketMessage(ChessStatus.ERROE.getType(), "房间内必须两人才能进入准备状态"));
+                        return ;
+                    }
+                    //如果两个人都在准备状态 开始游戏
+                    if (player.getPrepareNum().addAndGet(1) >= 2) {
+                        gameStart(player.getFirst(), player.getSecond());
+                    } else {
+                        sendMessage(new SocketMessage(ChessStatus.PREPARE.getType(), "已准备"));
+                        if (Objects.equals(session, player.getFirst())) {
+                            sessionMap.get(player.getSecond()).sendMessage(new SocketMessage(ChessStatus.PREPARE.getType(), "对方已准备"));
+                        } else {
+                            sessionMap.get(player.getFirst()).sendMessage(new SocketMessage(ChessStatus.PREPARE.getType(), "对方已准备"));
+                        }
+                    }
                 } else {
-                    try {
-                        Session otherSession = chessQueue.take();
-                        gameStart(otherSession, session);
-                    } catch (InterruptedException e) {
-                        log.info("对手被抢走");
-                        e.printStackTrace();
+                    //匹配模式  准备状态 想找对手
+                    if (chessQueue.size() == 0) {
+                        chessQueue.add(session);
+                        log.info("进入队列等待对手~~");
+                        sendMessage(new SocketMessage(ChessStatus.PREPARE.getType(), "正在匹配中...."));
+                    } else if (chessQueue.contains(session)) {
+                        log.info("已经在等待中。。。");
+                    } else {
+                        try {
+                            Session otherSession = chessQueue.take();
+                            gameStart(otherSession, session);
+                        } catch (InterruptedException e) {
+                            log.info("对手被抢走");
+                            e.printStackTrace();
+                        }
                     }
                 }
                 break;
             case "move" :
                 //移动棋子
-                log.info(socketMessage.getContent());
-                sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
+                Session otherSession = isPlayingMap.get(session);
+                if (otherSession != null) {
+                    sessionMap.get(otherSession).sendMessage(socketMessage);
+                }
                 break;
             case "chat" :
-                sessionMap.get(isPlayingMap.get(session)).sendMessage(socketMessage);
+                otherSession = isPlayingMap.get(session);
+                if (otherSession != null) {
+                    sessionMap.get(otherSession).sendMessage(socketMessage);
+                }
                 break;
             case "createRoom" :
                 //创建房间的请求
                 player = new RoomPlayer();
                 player.setPeopleNum(new AtomicInteger(1));
+                player.setPrepareNum(new AtomicInteger(0));
                 player.setFirst(session);
                 player.setRoomName(socketMessage.getContent());
-                player.setRoomId(roomId.get());
-                sessionToRoomId.put(session, roomId.get());
-                roomPlayerMap.put(roomId.getAndAdd(1), player);
+                player.setRoomId(roomIdGeneral.get());
+                sessionToRoomId.put(session, roomIdGeneral.get());
+                roomPlayerMap.put(roomIdGeneral.getAndAdd(1), player);
                 sendMessage(new SocketMessage(ChessStatus.CREATE_ROOM.getType(), ""));
                 break;
             case "enterRoom" :
                 //进入房间
                 player = roomPlayerMap.get(Integer.parseInt(socketMessage.getContent()));
-                if (player.getPeopleNum().compareAndSet(1, 2)) {
-                    Session otherSession = null;
-                    if (player.getFirst() == null) {
-                        player.setFirst(session);
-                        otherSession = player.getSecond();
-                    } else if (player.getSecond() == null) {
-                        player.setSecond(session);
-                        otherSession = player.getFirst();
-                    }
-                    sessionToRoomId.put(session, player.getRoomId());
-                    sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), sessionMap.get(otherSession).getUserId()));
-                    sessionMap.get(otherSession).sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), userId));
+                if (player == null) {
+                    sendMessage(new SocketMessage(ChessStatus.ROOM_DESTROY.getType(), "该房间不存在"));
                 } else {
-                    SocketMessage response = new SocketMessage();
-                    response.setType(ChessStatus.ERROE.getType());
-                    response.setContent("该房间已满");
-                    sendMessage(response);
+                    if (player.getPeopleNum().compareAndSet(1, 2)) {
+                        otherSession = null;
+                        if (player.getFirst() == null) {
+                            player.setFirst(session);
+                            otherSession = player.getSecond();
+                        } else if (player.getSecond() == null) {
+                            player.setSecond(session);
+                            otherSession = player.getFirst();
+                        }
+                        sessionToRoomId.put(session, player.getRoomId());
+                        sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), sessionMap.get(otherSession).getUserId()));
+                        sessionMap.get(otherSession).sendMessage(new SocketMessage(ChessStatus.ENTER_ROOM.getType(), userId));
+                    } else {
+                        SocketMessage response = new SocketMessage();
+                        response.setType(ChessStatus.ERROE.getType());
+                        response.setContent("该房间已满");
+                        sendMessage(response);
+                    }
                 }
                 break;
             case "roomStart" :
@@ -165,7 +196,7 @@ public class MyWebSocket {
                     otherSession = player.getSecond();
                 }
             }
-            else if (player.getFirst() != null && Objects.equals(player.getSecond(), session)) {
+            else if (player.getSecond() != null && Objects.equals(player.getSecond(), session)) {
                 player.setSecond(null);
                 int x = player.getPeopleNum().addAndGet(-1);
                 if (x > 0) {
@@ -181,6 +212,7 @@ public class MyWebSocket {
                         type(ChessStatus.LEAVE_ROOM.getType()).build());
                 log.info("房间[{}]剩余一人，已通知", roomId);
             }
+            sessionToRoomId.remove(session);
         }
         sessionMap.remove(session);
         this.session = null;

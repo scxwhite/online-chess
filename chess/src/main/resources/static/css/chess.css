@@ -43,7 +43,7 @@ canvas {
 
 }
 
-#gameHints {
+/*#gameHints {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
@@ -54,7 +54,7 @@ canvas {
     text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px, rgba(255, 255, 255, 0.2) 1px 3px 3px;
     -webkit-background-clip: text;
     color: hsl(10, 100%, 40%);
-}
+}*/
 
 #msgText, #confirmSend, #allMsg {
     border: 1px #52ff49 solid;
