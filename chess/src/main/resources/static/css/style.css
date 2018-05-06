@@ -100,6 +100,19 @@ input.pass {
     letter-spacing: 2px;
 }
 
+input.head {
+	width: 83%;
+	padding: 10px 10px 10px 45px;
+	background: rgba(23, 24, 25, 0.29) url("../images/head.png") no-repeat 11px 10px;
+	border: 1px solid #7B7474;
+	border-radius: 5px;
+	font-family: Oswald-Light;
+	font-size: 18px;
+	color: #FFF;
+	outline: none;
+	margin-bottom: 20px;
+	letter-spacing: 2px;
+}
 label {
     font-family: Oswald-Light;
     color: #FFF;

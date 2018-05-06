@@ -12,4 +12,6 @@ public interface UserService {
     Integer loginCheck(User user);
 
     User findById(Integer id);
+
+    boolean addUser(User user);
 }

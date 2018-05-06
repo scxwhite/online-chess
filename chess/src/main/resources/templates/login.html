@@ -41,14 +41,28 @@
         <button class="btn col-lg-3"  id="visitor" style="display: none;"></button>
         <button class="btn col-lg-3"  id="account" style="display: none;"></button>
     </div>
-    <div id="loginDiv" style="display: none;">
-        <h1 style="font-family: serif">游戏登录界面</h1>
-        <div class="signin">
-                <input type="text" class="user" name="username" id="username" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '用户名';}" />
-                <input type="password" class="pass" name="password" id="password" value="******" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '******';}" />
+    <div id="userContent" style="display: none;">
+        <div id="loginDiv">
+            <h1 style="font-family: serif">登录</h1>
+            <div class="signin" >
+                <input type="text" class="user" name="username" id="username"  placeholder="用户名"/>
+                <input type="password" class="pass" name="password" id="password" placeholder="密码"/>
                 <input type="submit" value="登录" id="login"/>
-                <input type="submit" value="注册" />
+                <input type="submit" value="快速注册" id="toRegister" />
+            </div>
         </div>
+        <div id="registerDiv" style="display: none">
+            <h1 style="font-family: serif">注册</h1>
+            <div class="signin" >
+                <input type="text" class="user" name="username_r" id="username_r"  placeholder="用户名"/>
+                <input type="password" class="pass" name="password_r" id="password_r" placeholder="密码"/>
+                <input type="password" class="pass" name="password_r" id="password_two" placeholder="再次输入密码"/>
+                <input type="text" class="head" name="image_r" id="image_r" placeholder="头像地址"/>
+                <input type="submit" value="注册" id="register" />
+                <input type="submit" value="返回" id="back" />
+            </div>
+        </div>
+
     </div>
 </body>
 <script src="/js/jquery-3.1.1.min.js" ></script>
@@ -67,29 +81,46 @@
                 isLogin = true;
                 $('#loginArea').toggle(1500);
                 $('#gameTitle').toggle(1500);
-                $('#loginDiv').toggle(1500);
+                $('#userContent').toggle(1500);
             }
         });
         $('#login').on('click', function () {
             login(1);
         });
 
+        $('#toRegister').on('click', function () {
+          changeDiv();
+        });
+        $('#back').on('click', function () {
+            changeDiv();
+        });
         $('#register').on('click', function () {
-            var username = $('#username').val();
-            var password = $('#password').val();
+            var username = $('#username_r').val();
+            var password = $('#password_r').val();
+            var password_two = $('#password_two').val();
+            var image_r = $('#image_r').val();
 
 
-            if (checkNull(username, "用户名不能为空") || checkNull(password, "密码不能为空")) {
+            if (checkNull(username, "用户名不能为空") || checkNull(password, "密码不能为空") || checkNull(image_r, "头像不能为空")) {
                 return ;
             }
-            var data =  "username=" + username + "&password=" + password;
+            if (password != password_two) {
+                alert("两次输入的密码不一致,请确认");
+                return ;
+            }
             $.ajax({
                 url: "/user/register",
                 type: "post",
-                data: data,
+                data: {
+                    username: username,
+                    password: password,
+                    imageUrl: image_r
+                },
                 success: function (data) {
                     checkNull(null, data.message);
-
+                    if (data.success == true) {
+                        changeDiv();
+                    }
                 }
             })
         })
@@ -142,7 +173,23 @@
             })
         }
     }
+    function changeDiv() {
+        $('#loginDiv').toggle(500);
+        $('#registerDiv').toggle(500);
+        setNull();
+    }
+    
+    function setNull() {
+        $('#username').val(null);
+        $('#username_r').val(null);
+        $('#password').val(null);
+        $('#password_two').val(null);
+        $('#password_r').val(null);
+        $('#image_r').val(null);
+
+    }
     function checkNull(val, msg) {
+        console.log(msg)
         if (val == null || val == undefined || val == "") {
             alert(msg + "^_^");
             return true;

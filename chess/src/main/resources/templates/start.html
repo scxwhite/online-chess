@@ -26,7 +26,7 @@
 
 <body class="container">
 <section id="ranking">
-    <span id="ranking_title">我的排行：3</span>
+    <span id="ranking_title">我的排行：2</span>
     <section id="ranking_list">
         <section class="box" th:each="score, status : ${scores}">
             <section class="col_1" title="1" th:text="${status.index + 1}"></section>
@@ -37,9 +37,9 @@
     </section>
     <a id="play_game" th:href="@{/index/chess}">匹配模式</a>
     <a id="play_game2" th:href="@{/index/model/room}">开房间</a>
-    <a id="play_game3" href="#">人机模式</a>
+  <!--  <a id="play_game3" href="#">人机模式</a>-->
 </section>
-<a id="return_back" href="#" title="返回">返回</a>
+<a id="return_back" href="/index/login" title="返回">返回</a>
 </body>
 
 <script th:src="@{/js/jquery-3.1.1.min.js}" type="text/javascript"></script>

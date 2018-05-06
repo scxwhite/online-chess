@@ -197,6 +197,8 @@ var ChessGame = function () {
         sign(getCoordinateX(4), getCoordinateY(6), 2);
         sign(getCoordinateX(6), getCoordinateY(6), 2);
         sign(getCoordinateX(8), getCoordinateY(6), 0);
+
+
     }
 
     //绘制棋盘

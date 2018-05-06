@@ -1,5 +1,6 @@
 package com.xynu.controller;
 
+import com.xynu.bo.UnCheckLogin;
 import com.xynu.entity.User;
 import com.xynu.model.JsonResponse;
 import com.xynu.service.UserService;
@@ -39,4 +40,15 @@ public class UserController {
         return new JsonResponse<>(false, "查询失败");
     }
 
+
+    @RequestMapping("register")
+    @ResponseBody
+    @UnCheckLogin
+    public JsonResponse<String> register(User user) {
+       boolean res = userService.addUser(user);
+       if (res) {
+           return new JsonResponse<>(true, "注册成功，请登录");
+       }
+       return new JsonResponse<>(false, "注册失败，请联系管理员");
+    }
 }
