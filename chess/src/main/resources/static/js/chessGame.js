@@ -31,6 +31,19 @@ function setText(msg, type) {
 function closeText() {
     $('#gameHints').css({"display" : "none"})
 }
+function record(id, res) {
+    $.ajax({
+        url: "/score/update",
+        type: "post",
+        data: {
+            id: id,
+            res: res
+        },
+        success: function (data) {
+            console.log(data.message);
+        }
+    })
+}
 var ChessGame = function () {
     var oChessGame = new Object();
     var canvas_jquery = $("#canvas");
@@ -458,24 +471,29 @@ var ChessGame = function () {
      *
      **/
      function checkWin(pointY, user) {
+         var id = getCookie("username");
         //如果是我方移动移动
         if (user === myUser) {
             if (pointY.x === enemyGeneral.x && pointY.y === enemyGeneral.y) {
                 gameOver("恭喜你，你赢了");
+                record(id, 1);
                 return;
             }
             //老将对面 ：先判断移动的是老将 然后判断是否对面
             if (checkGeneralFace()) {
                 gameOver("老将对面:抱歉，你输了");
+                record(id,0);
             }
         } else { //如果是 敌方移动
             if (pointY.x === myGeneral.x && pointY.y === myGeneral.y) {
                 gameOver("抱歉，你输了");
+                record(id, 0);
                 return;
             }
             //老将对面 ：先判断移动的是老将 然后判断是否对面
             if (checkGeneralFace()) {
                 gameOver("老将对面:恭喜你，你赢了");
+                record(id, 1);
             }
         }
     }

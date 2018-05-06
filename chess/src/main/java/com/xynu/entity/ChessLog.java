@@ -1,5 +1,6 @@
 package com.xynu.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @date 2018/4/10
  */
 @Data
+@Builder
 public class ChessLog {
     /**
      * 主键ID

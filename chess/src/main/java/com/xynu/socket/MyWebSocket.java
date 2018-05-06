@@ -180,7 +180,10 @@ public class MyWebSocket {
         Session other = isPlayingMap.get(session);
         //如果此人正在游戏中   那么通知另外一个人 游戏赢了
         if (other != null) {
-            sessionMap.get(other).sendMessage(SocketMessage.builder().type(ChessStatus.LEAVE.getType()).build());
+            sessionMap.get(other).sendMessage(SocketMessage.builder().
+                    type(ChessStatus.LEAVE.getType()).
+                    content(userId).
+                    build());
             isPlayingMap.remove(session);
             isPlayingMap.remove(other);
         }

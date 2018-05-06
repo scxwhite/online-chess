@@ -26,7 +26,7 @@
 
 <body class="container">
 <section id="ranking">
-    <span id="ranking_title">我的排行：2</span>
+    <span id="ranking_title" th:text="${'我的排行：' + rank}"></span>
     <section id="ranking_list">
         <section class="box" th:each="score, status : ${scores}">
             <section class="col_1" title="1" th:text="${status.index + 1}"></section>

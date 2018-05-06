@@ -36,7 +36,7 @@
         win_times = #{winTimes,jdbcType=INTEGER},
         fail_times = #{failTimes,jdbcType=INTEGER}
         where
-        user_id = #{id,jdbcType=INTEGER}
+        user_id = #{userId,jdbcType=INTEGER}
     </update>
 
     <select id="selectTopScores" resultMap="BaseResultMap">
@@ -45,5 +45,20 @@
         from
         <include refid="base_table"/>
         order by win_times desc limit 8
+    </select>
+
+    <insert id="insertLog" parameterType="com.xynu.entity.ChessLog" >
+        insert into
+        chess_log
+        (user_id, type)
+        values
+        (#{userId,jdbcType=INTEGER},#{type,jdbcType=INTEGER})
+    </insert>
+    
+    <select id="selectRank" resultType="java.lang.Integer">
+        select count(*)
+        from
+        <include refid="base_table"/>
+        where win_times > #{winTimes, jdbcType=INTEGER}
     </select>
 </mapper>

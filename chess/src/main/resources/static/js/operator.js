@@ -17,7 +17,7 @@ window.onload = function () {
         //请求变为准备状态
         socket.send(new socketMessage("prepare", null));
     });
-
+    setHeadImage(null);
     $('#confirmSend').on('click', function () {
         var x = $('#msgText');
         var msg = x.val();
@@ -54,6 +54,8 @@ window.onload = function () {
             var pointY = new Coordinate(parseInt(secondPoint[0]), parseInt(secondPoint[1]));
             chessGame.chessMove(pointX, pointY, otherUser);
         } else if (data.type === "leave") {
+            record(data.content, 0);
+            record(getCookie("username"), 1);
             setText("由于对方离开，恭喜你 ，你赢了", 2);
         } else if (data.type === "chat") {
             toChat(data.content, otherName.username);

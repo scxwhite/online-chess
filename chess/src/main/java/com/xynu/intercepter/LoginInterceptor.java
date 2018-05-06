@@ -1,6 +1,7 @@
 package com.xynu.intercepter;
 
 import com.xynu.bo.UnCheckLogin;
+import com.xynu.util.AppUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -39,9 +40,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         UnCheckLogin declaredAnnotation = handlerMethod.getBeanType().getDeclaredAnnotation(UnCheckLogin.class);
         //如果没有UnCheckLogin的注释  那么就需要进行验证
         if (methodAnnotation == null && declaredAnnotation == null) {
-            String username = getValueFromCookie(request, "username");
+            String username = AppUtils.getValueFromCookie(request, "username");
             if (username == null) {
-                removeCookieByValue(response, "username");
+                AppUtils.removeCookieByValue(response, "username");
                 response.sendRedirect("/index/login");
                 return false;
             }
@@ -50,23 +51,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     }
 
 
-    private String getValueFromCookie(HttpServletRequest request, String key) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null ) {
-            return null;
-        }
-        for (Cookie cookie : cookies) {
-            if (Objects.equals(cookie.getName(), key)) {
-                return cookie.getValue();
-            }
-        }
-        return null;
-    }
 
-    private void removeCookieByValue(HttpServletResponse response, String key) {
-        Cookie cookie = new Cookie(key, null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-    }
 }

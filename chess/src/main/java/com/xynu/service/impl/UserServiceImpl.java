@@ -8,6 +8,7 @@ import com.xynu.service.UserService;
 import com.xynu.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -34,15 +35,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean addUser(User user) {
-        user.setPassword(MD5Util.getMD5(user.getPassword()));
-        Integer insert = userMapper.insert(user);
-        System.out.println("id=" + insert + "userId=" + user.getId());
-        Scores scores = new Scores();
-        scores.setFailTimes(0);
-        scores.setWinTimes(0);
-        scores.setUserId(user.getId());
-        scoresMapper.insert(scores);
+        Integer insert = null;
+        try {
+            user.setPassword(MD5Util.getMD5(user.getPassword()));
+            insert = userMapper.insert(user);
+            System.out.println("id=" + insert + "userId=" + user.getId());
+            scoresMapper.insert(Scores.builder().userId(user.getId()).winTimes(0).failTimes(0).build());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
         return insert != null &&  insert > 0;
     }
 }
