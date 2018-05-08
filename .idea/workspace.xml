@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c26d46f-a38d-4baf-adbf-84e593d5a540" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/PageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/chess/src/main/resources/templates/login.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/chess/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,14 +36,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScoresServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ScoresServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/service/impl/ScoresServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="75" column="13" lean-forward="true" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+            <state relative-caret-position="177">
+              <caret line="80" column="30" lean-forward="true" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="chess.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chess/src/main/resources/sql/chess.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="30" column="53" lean-forward="true" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="62" column="18" lean-forward="true" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -59,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PageController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PageController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/PageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="47" column="62" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
+            <state relative-caret-position="191">
+              <caret line="48" column="55" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -85,26 +104,8 @@
       <file leaf-file-name="start.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/start.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoresMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chess/src/main/resources/mybatis/ScoresMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="53" column="14" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScoresMapper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/mapper/ScoresMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            <state relative-caret-position="117">
+              <caret line="28" column="45" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -131,7 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isPlayingMap</find>
       <find>sessionMap</find>
       <find>debugg</find>
       <find>check</find>
@@ -161,6 +161,7 @@
       <find>cookie</find>
       <find>昵称</find>
       <find>getcookie</find>
+      <find>返回</find>
     </findStrings>
     <replaceStrings>
       <replace>otherUser + &quot;</replace>
@@ -215,7 +216,6 @@
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xynu/entity/Scores.java" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/static/js/operator.js" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js" />
-        <option value="$PROJECT_DIR$/chess/src/main/resources/templates/login.html" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/templates/error.html" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/mybatis/ScoresMapper.xml" />
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xynu/mapper/ScoresMapper.java" />
@@ -223,8 +223,9 @@
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xynu/util/AppUtils.java" />
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xynu/intercepter/LoginInterceptor.java" />
         <option value="$PROJECT_DIR$/chess/src/main/resources/templates/start.html" />
-        <option value="$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/PageController.java" />
         <option value="$PROJECT_DIR$/chess/src/main/java/com/xynu/service/impl/ScoresServiceImpl.java" />
+        <option value="$PROJECT_DIR$/chess/src/main/resources/templates/login.html" />
+        <option value="$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/PageController.java" />
       </list>
     </option>
   </component>
@@ -259,8 +260,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -368,79 +368,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-chess" type="462c0819:PsiDirectoryNode" />
-              <item name="chess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-chess" type="462c0819:PsiDirectoryNode" />
-              <item name="chess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-chess" type="462c0819:PsiDirectoryNode" />
-              <item name="chess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-chess" type="462c0819:PsiDirectoryNode" />
-              <item name="chess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="background" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-chess" type="462c0819:PsiDirectoryNode" />
-              <item name="chess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="chat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-chess" type="462c0819:PsiDirectoryNode" />
-              <item name="chess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="result" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-chess" type="462c0819:PsiDirectoryNode" />
-              <item name="chess" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="sql" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="online-chess" type="b2602c69:ProjectViewProjectNode" />
@@ -455,7 +383,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -476,10 +405,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/chess/src/main/resources/sql" />
+      <recent name="$PROJECT_DIR$/chess/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/chess/src/main/resources/mybatis" />
       <recent name="$PROJECT_DIR$/chess/src/main/resources/static/images" />
-      <recent name="$PROJECT_DIR$/chess/src/main/resources/static/js" />
-      <recent name="D:\myHome\online-chess\chess\src\main\resources\static" />
+      <recent name="$PROJECT_DIR$/chess/src/main/resources/static/images/room" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.xynu.mapper" />
@@ -487,12 +418,10 @@
       <recent name="com.xyny.bo" />
       <recent name="com.xyny.intercepter" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/chess/src/main/resources/templates" />
-      <recent name="$PROJECT_DIR$/chess/src/main/resources/mybatis" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/chess/src/main/resources/static/images" />
-      <recent name="$PROJECT_DIR$/chess/src/main/resources/static/images/room" />
-      <recent name="$PROJECT_DIR$/chess/src/main/resources/static/img/background" />
+      <recent name="$PROJECT_DIR$/chess/src/main/resources/static/js" />
+      <recent name="D:\myHome\online-chess\chess\src\main\resources\static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1052,6 +981,7 @@
       <workItem from="1525607362175" duration="5341000" />
       <workItem from="1525695014703" duration="114000" />
       <workItem from="1525695230859" duration="184000" />
+      <workItem from="1525777989778" duration="562000" />
     </task>
     <task id="LOCAL-00001" summary="老将坐标  bug fixed">
       <created>1521615043713</created>
@@ -1100,7 +1030,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137119000" />
+    <option name="totallyTimeSpent" value="137681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1116,31 +1046,31 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3830303" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3830303" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.31757575" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32848486" />
       <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32848486" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32924107" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32848486" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3190272" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32848486" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32331902" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" id="Properties" order="3" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Problems" order="13" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Nl-Palette" order="2" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.31757575" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Properties" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1187,13 +1117,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/start.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="57" lean-forward="true" selection-start-line="41" selection-start-column="57" selection-end-line="41" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/service/impl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1394,9 +1317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1645">
           <caret line="184" column="34" selection-start-line="184" selection-start-column="28" selection-end-line="184" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1442,13 +1362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/resources/static/js/chessGame.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
@@ -1491,16 +1404,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/util/AppUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/intercepter/LoginInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -1520,13 +1423,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/start.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/ScoreController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1537,13 +1433,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/PageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="47" column="62" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/service/ScoresService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1551,13 +1440,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/sql/chess.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="30" column="53" lean-forward="true" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="62" column="18" lean-forward="true" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/service/impl/ScoresServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="75" column="13" lean-forward="true" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+        <state relative-caret-position="177">
+          <caret line="80" column="30" lean-forward="true" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/util/AppUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/resources/templates/start.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/src/main/java/com/xynu/controller/PageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="48" column="55" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
         </state>
       </provider>
     </entry>

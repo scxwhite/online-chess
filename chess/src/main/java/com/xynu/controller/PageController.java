@@ -45,7 +45,12 @@ public class PageController {
         String id = AppUtils.getValueFromCookie(request, "username");
 
         if (id != null) {
-            modelAndView.addObject("rank", scoresService.findRank(Integer.parseInt(id)));
+            if (id.equals("-1")) {
+                modelAndView.addObject("rank", "游客不参与排名");
+            } else {
+                modelAndView.addObject("rank", scoresService.findRank(Integer.parseInt(id)));
+
+            }
         }
         return modelAndView;
     }
