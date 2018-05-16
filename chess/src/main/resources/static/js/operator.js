@@ -40,6 +40,7 @@ window.onload = function () {
         console.log(data)
         if (data.type === "start") {
             if (data.content === "you first") {
+                changeUser();
                 turnMe = true;
             } else {
                 turnMe = false;

@@ -11,6 +11,11 @@ function Coordinate(x, y) {
     this.y = y;
 }
 
+function changeUser() {
+    var tmp = myUser;
+    myUser = otherUser;
+    otherUser = tmp;
+}
 /**
  * 设置文字
  * @param msg   文字内容
