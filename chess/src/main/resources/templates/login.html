@@ -7,41 +7,47 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <style>
         html {
-            margin:0 auto;
+            margin:0 0;
             padding:0;
             height: 100%;
             width: 100%;
         }
 
+        *{
+            margin: 0;
+            padding: 0;
+        }
         #visitor {
-            width: 300px;
-            height: 150px;
             background: url("../img/login/button2.png") center no-repeat;
             background-size: 100% 100%;
-            position: fixed;
         }
 
         #account {
-            width: 300px;
-            height: 150px;
             background: url("../img/login/button3.png") center no-repeat;
             background-size: 100% 100%;
-            position: fixed;
         }
     </style>
 </head>
 <body class="container" >
-    <div class="row" id="gameTitle" style="position: fixed;display: none">
-        <img th:src="@{/img/login/gameTitle.png}">
+    <div class="row" id="gameTitle" style="display: none">
+        <div class="col-lg-12 text-center">
+            <h1 style="color: #e7e74e;font-family: '微软雅黑'">基于Java的网上象棋对弈程序设计</h1>
+        </div>
     </div>
-    <div class="row" id="loginArea">
-        <button class="btn col-lg-3"  id="visitor" style="display: none;"></button>
-        <button class="btn col-lg-3"  id="account" style="display: none;"></button>
+    <div class="row" id="loginArea" style="margin-top: 50%">
+        <div class="col-lg-6 col-sm-6 col-md-6">
+            <button class="btn btn-large btn-primary center-block"  id="visitor" style="display: none;width: 150px;height: 90px"></button>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6">
+            <button class="btn btn-large btn-primary center-block"  id="account" style="display: none;width: 150px;height: 90px"></button>
+
+        </div>
     </div>
-    <div id="userContent" style="display: none;">
+    <div id="userContent" style="display: none;width: 100%;">
         <div id="loginDiv">
             <h1 style="font-family: serif">登录</h1>
             <div class="signin" >
@@ -51,7 +57,7 @@
                 <input type="submit" value="快速注册" id="toRegister" />
             </div>
         </div>
-        <div id="registerDiv" style="display: none">
+        <div id="registerDiv" style="display: none;">
             <h1 style="font-family: serif">注册</h1>
             <div class="signin" >
                 <input type="text" class="user" name="username_r" id="username_r"  placeholder="用户名"/>
@@ -59,7 +65,7 @@
                 <input type="password" class="pass" name="password_r" id="password_two" placeholder="再次输入密码"/>
                 <input type="text" class="head" name="image_r" id="image_r" placeholder="头像地址"/>
                 <input type="submit" value="注册" id="register" />
-                <input type="submit" value="返回" onclick="javascript:history.back(-1);" id="back" />
+                <input type="submit" value="返回" onclick="javascript:location.href='/index/login'" id="back" />
             </div>
         </div>
 
@@ -126,13 +132,10 @@
         })
     });
     function initUI() {
-        var windowWidth = window.screen.width;
-        var windowHeight = window.screen.height;
-        console.log(windowHeight + " " + windowWidth)
-        $('#gameTitle').css({"left": windowWidth / 2 - 390,"top": windowHeight / 2 - windowHeight * 0.3}).toggle(1500);
+        $('#gameTitle').toggle(1500);
 
-        $('#visitor').css({"left": windowWidth / 2 - 175 - 300,"bottom" : windowHeight * 0.1}).toggle(1500);
-        $('#account').css({"left": windowWidth / 2 - 175 + 300,"bottom" : windowHeight * 0.1}).toggle(1500);
+        $('#visitor').toggle(1500);
+        $('#account').toggle(1500);
 
     }
     function login(type) {
