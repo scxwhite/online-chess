@@ -1,11 +1,18 @@
-var myName , otherName;
-window.onload = function () {
-    var windowWidth = window.screen.availWidth;
-    var windowHeight = window.screen.availHeight;
-    var chessGame = new ChessGame();
+var myName , otherName, chessGame;
+function initUI() {
+    var windowWidth = document.body.clientWidth;
+    var windowHeight = document.body.clientHeight;
+    chessGame = new ChessGame();
     $('#canvas').css({"width": windowWidth * 0.4, "height": windowHeight * 0.7});
     $('#chat').css({"width": windowWidth * 0.2, "height": windowHeight * 0.6});
     $('#userInfo').css({"width": windowWidth * 0.2, "height": windowHeight * 0.7});
+}
+window.onload = function () {
+    initUI();
+    console.log(222)
+    $(window).resize(function() {
+        initUI();
+    });
     if (!socket.connected()) {
         socket.connect("ws://"+ getCookie("address")+":8080/websocket?id=" + getCookie("username"));
     }
