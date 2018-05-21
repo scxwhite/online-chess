@@ -1,6 +1,7 @@
 var myUser = 'black';
 var otherUser = 'red';
 var turnMe = true;
+var chessStatus = [];
 /**
  * 坐标对象
  * @param x    x坐标
@@ -49,6 +50,8 @@ function record(id, res) {
         }
     })
 }
+
+//当前象棋状态
 var ChessGame = function () {
     var oChessGame = new Object();
     var canvas_jquery = $("#canvas");
@@ -56,8 +59,6 @@ var ChessGame = function () {
     var canvasWidth = canvas_jquery.attr("width");
     var canvasHeight = canvas_jquery.attr("height");
     var ctx = canvas.getContext("2d");
-    //当前象棋状态
-    var chessStatus = [];
     //敌方老将的位置
     var enemyGeneral = new Coordinate(4, 0);
     //我方老将的位置
@@ -72,14 +73,14 @@ var ChessGame = function () {
     var clickChess;
     //棋盘的线个数
     var xNum = 9, yNum = 5 * 2;
-    //棋线间隔93
+    //棋线间隔60
     var space = 60;
     //有效的坐标
     var validCoordinate = [];
     //棋盘外框起始坐标
     var blackRect = new Coordinate(20, 20);
     //棋盘外边框的宽和高
-    var blackRectWidth = 490, blackRectHeight = 550;
+    var blackRectWidth = canvasWidth - 50, blackRectHeight = canvasHeight - 50;
     //将棋盘视为以左上角 （10，10） 为圆点的坐标轴
     var start = new Coordinate(blackRect.x + 5, blackRect.y + 5);
     var end = new Coordinate(getCoordinateX(xNum - 1), getCoordinateY(yNum - 1));
@@ -303,11 +304,20 @@ var ChessGame = function () {
         chessStatus["7,7"] = myUser + "_cannon";
         chessStatus["4,9"] = myUser + "_general";
     }
-
+    function initElement() {
+        canvas_jquery = $("#canvas");
+        canvas = canvas_jquery[0];
+        canvasWidth = canvas_jquery.attr("width");
+        canvasHeight = canvas_jquery.attr("height");
+        ctx = canvas.getContext("2d");
+        blackRectWidth = canvasWidth - 50;
+        blackRectHeight = canvasHeight - 50;
+    }
     /**
      *     在 (x,y)处绘制图片image
      */
     function initUI() {
+        initElement();
         //首先清除画布
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         //棋盘线条颜色
@@ -328,13 +338,16 @@ var ChessGame = function () {
         drawFont();
         //初始化棋盘位置
         drawChess();
+        ctx.save();
     }
     function initData() {
         //保存有效坐标
         saveValidCoordinate();
         //保存当前的象棋的状态
         saveChessStatus();
-    };
+    }
+
+
     oChessGame.start = function () {
         //初始化数据
         initData();
@@ -372,6 +385,11 @@ var ChessGame = function () {
                 }
             });
 
+            $(window).resize(function() {
+                initHtml();
+                initUI();
+            });
+
         }
 
 
@@ -406,9 +424,8 @@ var ChessGame = function () {
      * @param user  当前移动的用户
      **/
     oChessGame.chessMove = function (pointX, pointY, user) {
-        console.log("我方老将位置" + JSON.stringify(myGeneral));
-        console.log("敌方老将位置" + JSON.stringify(enemyGeneral));
-        var chessName = chessStatus[pointX.x + "," + pointX.y];
+        var posix = String(pointX.x + "," + pointX.y);
+        var chessName = chessStatus[posix];
         if (chessName === null || !canMove(chessName, pointX, pointY) || (user === myUser && !turnMe) || (user === otherUser && turnMe)) {
             return false;
         }
@@ -529,6 +546,9 @@ var ChessGame = function () {
      * @param pointY    终点坐标 即：象棋走向的坐标
      **/
     function canMove(chessName, pointX, pointY) {
+        if (chessName == null || chessName === undefined) {
+            return false;
+        }
         chessName = chessName.split("_");
         var isOther = chessName[0] === otherUser;
         var tmp_x, tmp_y;

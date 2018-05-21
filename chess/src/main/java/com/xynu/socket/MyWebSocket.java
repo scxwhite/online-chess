@@ -1,6 +1,7 @@
 package com.xynu.socket;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.xynu.model.ChessStatus;
 import com.xynu.model.RoomPlayer;
 import com.xynu.model.SocketMessage;
@@ -69,6 +70,7 @@ public class MyWebSocket {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        System.out.println(JSONObject.toJSONString(socketMessage));
         RoomPlayer player;
         switch (socketMessage.getType()) {
             case "prepare":

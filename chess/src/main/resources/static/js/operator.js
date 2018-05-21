@@ -1,5 +1,5 @@
 var myName , otherName, chessGame;
-function initUI() {
+function initHtml() {
     var windowWidth = document.body.clientWidth;
     var windowHeight = document.body.clientHeight;
     chessGame = new ChessGame();
@@ -8,11 +8,8 @@ function initUI() {
     $('#userInfo').css({"width": windowWidth * 0.2, "height": windowHeight * 0.7});
 }
 window.onload = function () {
-    initUI();
-    console.log(222)
-    $(window).resize(function() {
-        initUI();
-    });
+    initHtml();
+
     if (!socket.connected()) {
         socket.connect("ws://"+ getCookie("address")+":8080/websocket?id=" + getCookie("username"));
     }
